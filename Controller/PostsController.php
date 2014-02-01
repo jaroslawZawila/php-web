@@ -1,76 +1,107 @@
 <?php
+App::uses('AppController', 'Controller');
 /**
- * Created by PhpStorm.
- * User: jaroslaw
- * Date: 29/01/14
- * Time: 19:44
+ * Posts Controller
+ *
+ * @property Post $Post
+ * @property PaginatorComponent $Paginator
  */
-
 class PostsController extends AppController {
-    public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('Session');
 
-    public function index() {
-        $this->set('posts', $this->Post->find('all'));
-    }
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
 
-    public function view($id) {
-        if (!$id) {
-            throw new NotFoundException(__('Invalid post'));
-        }
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->Post->recursive = 0;
+		$this->set('posts', $this->Paginator->paginate());
+	}
 
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-        $this->set('post', $post);
-    }
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->Post->exists($id)) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
+		$this->set('post', $this->Post->find('first', $options));
+	}
 
-    public function add() {
-        if ($this->request->is('post')) {
-            $this->Post->create();
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Session->setFlash(__('Unable to add your post.'));
-        }
-    }
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->Post->create();
+			if ($this->Post->save($this->request->data)) {
+				$this->Session->setFlash(__('The post has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+			}
+		}
+		$users = $this->Post->User->find('list');
+		$this->set(compact('users'));
+	}
 
-    public function edit($id = null) {
-        if (!$id) {
-            throw new NotFoundException(__('Invalid post'));
-        }
+/**
+ * edit method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->Post->exists($id)) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->Post->save($this->request->data)) {
+				$this->Session->setFlash(__('The post has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('Post.' . $this->Post->primaryKey => $id));
+			$this->request->data = $this->Post->find('first', $options);
+		}
+		$users = $this->Post->User->find('list');
+		$this->set(compact('users'));
+	}
 
-        $post = $this->Post->findById($id);
-        if (!$post) {
-            throw new NotFoundException(__('Invalid post'));
-        }
-
-        if ($this->request->is(array('post', 'put'))) {
-            $this->Post->id = $id;
-            if ($this->Post->save($this->request->data)) {
-                $this->Session->setFlash(__('Your post has been updated.'));
-                return $this->redirect(array('action' => 'index'));
-            }
-            $this->Session->setFlash(__('Unable to update your post.'));
-        }
-
-        if (!$this->request->data) {
-            $this->request->data = $post;
-        }
-    }
-
-    public function delete($id) {
-        if ($this->request->is('get')) {
-            throw new MethodNotAllowedException();
-        }
-
-        if ($this->Post->delete($id)) {
-            $this->Session->setFlash(
-                __('The post with id: %s has been deleted.', h($id))
-            );
-            return $this->redirect(array('action' => 'index'));
-        }
-    }
-}
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function delete($id = null) {
+		$this->Post->id = $id;
+		if (!$this->Post->exists()) {
+			throw new NotFoundException(__('Invalid post'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Post->delete()) {
+			$this->Session->setFlash(__('The post has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The post could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}}

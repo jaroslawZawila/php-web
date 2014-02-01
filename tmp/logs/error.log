@@ -83,3 +83,37 @@ Stack Trace:
 #4 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #5 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/index.php(41): require('/home/jaroslaw/...')
 #6 {main}
+2014-02-01 20:55:55 Error: [MissingControllerException] Controller class PostsController could not be found.
+Exception Attributes: array (
+  'class' => 'PostsController',
+  'plugin' => NULL,
+)
+Request URL: /app/webroot/index.php/
+Stack Trace:
+#0 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-01 21:01:34 Error: [MissingTableException] Table aros_acos for model Permission was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'aros_acos',
+  'class' => 'Permission',
+  'ds' => 'default',
+)
+Request URL: /app/webroot/index.php/users/add
+Stack Trace:
+#0 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Model/Model.php(3496): Model->setSource('aros_acos')
+#1 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Model/Model.php(1355): Model->getDataSource()
+#2 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Model/Permission.php(81): Model->schema()
+#3 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Component/Acl/DbAcl.php(74): Permission->check(Array, 'controllers/Use...', '*')
+#4 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Component/AclComponent.php(110): DbAcl->check(Array, 'controllers/Use...', '*')
+#5 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Component/Auth/ActionsAuthorize.php(40): AclComponent->check(Array, 'controllers/Use...')
+#6 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Component/AuthComponent.php(462): ActionsAuthorize->authorize(Array, Object(CakeRequest))
+#7 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Component/AuthComponent.php(307): AuthComponent->isAuthorized(Array)
+#8 [internal function]: AuthComponent->startup(Object(UsersController))
+#9 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Utility/ObjectCollection.php(132): call_user_func_array(Array, Array)
+#10 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#11 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Event/CakeEventManager.php(247): call_user_func(Array, Object(CakeEvent))
+#12 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Controller/Controller.php(675): CakeEventManager->dispatch(Object(CakeEvent))
+#13 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Routing/Dispatcher.php(182): Controller->startupProcess()
+#14 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/lib/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 /home/jaroslaw/Documents/Uni/dev/apatche/htdocs/cakephp/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
