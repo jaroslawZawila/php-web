@@ -40,6 +40,7 @@ class AppController extends Controller {
         ),
         'Session'
     );
+
     public $helpers = array('Html', 'Form', 'Session');
 
     public function beforeFilter() {

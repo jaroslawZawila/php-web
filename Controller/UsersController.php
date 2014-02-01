@@ -116,13 +116,30 @@ class UsersController extends AppController {
     }
 
     public function logout() {
-        //Leave empty for now.
+        $this->Session->setFlash('Good-Bye');
+        $this->redirect($this->Auth->logout());
     }
+
+//    public function beforeFilter() {
+//        parent::beforeFilter();
+//
+//        // For CakePHP 2.1 and up
+//        $this->Auth->allow();
+//    }
 
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->Auth->allow('initDB'); // We can remove this line after we're finished
+    }
 
-        // For CakePHP 2.1 and up
-        $this->Auth->allow();
+    public function initDB() {
+        $group = $this->User->Group;
+        //Allow admins to everything
+        $group->id = 1;
+        $this->Acl->allow($group, 'controllers');
+
+
+        echo "all done";
+        exit;
     }
 }

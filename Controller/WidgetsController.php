@@ -100,4 +100,11 @@ class WidgetsController extends AppController {
 			$this->Session->setFlash(__('The widget could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('index', 'view');
+        $this->Auth->allow('display');
+    }
+}
