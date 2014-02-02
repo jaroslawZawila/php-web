@@ -1,4 +1,4 @@
-<ul class="nav">
+<ul class="nav navbar-nav">
     <li class="divider-vertical"><a href="/home">Home</a></li>
     <li class="divider-vertical"><a href="/about">About</a></li>
     <li class="divider-vertical"><a href="#">For Sale</a></li>
