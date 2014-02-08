@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <?php echo $this->Html->image('logo.jpg', array('alt'=>'LOGO', 'width'=>'100%')) ?>
+        <?php echo $this->Html->image('logo.jpg', array('alt'=>'LOGO', 'width'=>'100%', 'height'=>'175px')) ?>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

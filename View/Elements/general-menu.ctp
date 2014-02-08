@@ -6,5 +6,5 @@
     <li class="divider-vertical"><a href="#">To Let</a></li>
     <li class="divider-vertical"><a href="#">Sellers</a></li>
     <li class="divider-vertical"><a href="#">Landlords</a></li>
-    <li class="divider-vertical"><a href="#">Contact</a></li>
+    <li class="divider-vertical"><a href="/contact">Contact</a></li>
 </ul>
