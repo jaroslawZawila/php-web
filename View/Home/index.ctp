@@ -1,3 +1,1 @@
-<div class="jumbotron">
-    HELLO
-    </div>
+<?php $this->render("/Properties/add") ?>
