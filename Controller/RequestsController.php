@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
 class RequestsController extends AppController {
 
     public function beforeFilter() {
-        $this->Auth->allow(); // We can remove this line after we're finished
+        $this->Auth->allow('add'); // We can remove this line after we're finished
     }
 
 /**
