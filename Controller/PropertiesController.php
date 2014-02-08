@@ -25,10 +25,24 @@ class PropertiesController extends AppController {
  *
  * @return void
  */
+    function min() {
+        return array('100000' => "£ 100,000",
+            '110000' => "£ 110,000",
+            '120000' => "£ 120,000",
+            '130000' => "£ 130,000",
+            '140000' => "£ 140,000");
+    }
+
 	public function index() {
+
+        if(!empty($this->params->query)){
+            $this->params->data = array('Search' => $this->params->query);
+        }
 		$this->Property->recursive = 0;
 		$this->set('properties', $this->Paginator->paginate());
+        $this->set('minmax', $this->min());
 	}
+
 
 /**
  * view method

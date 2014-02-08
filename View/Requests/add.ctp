@@ -58,7 +58,7 @@
                             <br/>
                         </fieldset>
                         <?php
-                        echo $this->Form->submit(__('Submit',true), array('class'=>'btn btn-primary'));
+                        echo $this->Form->submit('Send', array('class'=>'btn btn-primary'));
                         echo $this->Form->end(); ?>
                     </div>
                 </div>
