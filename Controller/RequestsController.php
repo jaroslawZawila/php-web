@@ -53,10 +53,10 @@ class RequestsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Request->create();
 			if ($this->Request->save($this->request->data)) {
-				$this->Session->setFlash('The request has been saved.','default', array('class' => 'label label-success'));
+				$this->Session->setFlash('The request has been send.','default', array('class' => 'alert alert-success', 'style' => 'font-size:medium;'));
 				$this->request->data = null;
 			} else {
-				$this->Session->setFlash('The request could not be saved. Please, try again.','default', array('class' => 'label label-danger'));
+				$this->Session->setFlash('The request could not be send. Please, contact us by phone.','default', array('class' => 'alert alert-danger'));
 			}
 		}
 	}
