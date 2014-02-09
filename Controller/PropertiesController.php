@@ -33,13 +33,40 @@ class PropertiesController extends AppController {
             '140000' => "£ 140,000");
     }
 
+    function buildquery($params) {
+//
+        $conditions = array();
+        if(!empty($this->params->query['mina'])){
+          $conditions = $conditions + array('Property.price >=' => $this->params->query['mina']);
+        }
+        if(!empty($this->params->query['max'])){
+            $conditions = $conditions + array('Property.price <' => $this->params->query['max']);
+        }
+        if(!empty($this->params->query['minbeds'])){
+            $conditions = $conditions + array('Property.beds >=' => $this->params->query['minbeds']);
+            $this->Session->setflash('I am here');
+        }
+        if(!empty($this->params->query['maxbeds'])){
+            $conditions = $conditions + array('Property.beds <=' => $this->params->query['maxbeds'] );
+        }
+        if(!empty($this->params->query['type'])){
+            $conditions = $conditions + array('Property.hometype =' => $this->params->query['type']);
+        }
+        return $conditions;
+    }
+
 	public function index() {
 
         if(!empty($this->params->query)){
             $this->params->data = array('Search' => $this->params->query);
         }
-		$this->Property->recursive = 0;
-		$this->set('properties', $this->Paginator->paginate());
+        $this->set('properties', $this->Property->find('all', array(
+            'conditions' => $this->buildquery($this->params->query)
+        )));
+
+        $this->set('featured', $this->Property->find('all', array(
+            'conditions' => $this->buildquery($this->params->query)
+        )));
         $this->set('minmax', $this->min());
 	}
 

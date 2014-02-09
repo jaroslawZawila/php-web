@@ -17,6 +17,22 @@
                     'options' => $minmax,
                     'empty' => 'no max')); ?>
         </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon">min beds</span>
+            <?php echo $this->Form->input('minbeds', array('class' => 'form-control',
+                    'options' => array('no min beds','1','2','3','4','5','6','7'))); ?>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon">max beds</span>
+            <?php echo $this->Form->input('maxbeds', array('class' => 'form-control',
+                    'options' => array('no max beds','1','2','3','4','5','6','7'))); ?>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon">type</span>
+            <?php echo $this->Form->input('type', array('class' => 'form-control',
+                    'options' => array('house' => 'house','flat' => 'flat'),
+                    'empty' => 'no type')); ?>
+        </div>
     </fieldset>
     <?php
             echo $this->Form->submit('Search', array('class'=>'btn btn-primary'));
