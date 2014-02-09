@@ -105,8 +105,15 @@ class PropertiesController extends AppController {
         $this->set('resultstitle', 'For sell:');
     }
 
-	public function index($type) {
+	public function index($type = null) {
 
+        if (!empty ($this->params->query['action'])){
+            if($this->params->query['action'] == 'Let') {
+                $type = 'tolet';
+            }else if($this->params->query['action'] == 'Let') {
+                $type = 'forrent';
+            }
+        }
         if($type == 'tolet') {
             $this->tolet();
         }else {

@@ -1,6 +1,7 @@
 <div class="requests form">
     <?php echo $this->Form->create('Search', array('type' => 'get','inputDefaults' => array('label'=>false, 'div'=>false))); ?>
     <fieldset>
+        <?php echo $this->Form->input('action', array('type' => 'hidden')); ?>
         <div class="input-group input-group-sm" style="margin-bottom: 0.5em">
             <span class="input-group-addon">postcode</span>
             <?php echo $this->Form->input('postcode', array('class' => 'form-control', 'placeholder' => 'bs5')); ?>
