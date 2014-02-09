@@ -31,7 +31,8 @@
  */
     Router::connect('/about', array('controller' => 'pages', 'action' => 'display', 'about'));
     Router::connect('/contact', array('controller' => 'requests', 'action' => 'add'));
-    Router::connect('/forsale', array('controller' => 'properties', 'action' => 'index'));
+    Router::connect('/forsale', array('controller' => 'properties', 'action' => 'index', 'forsale'));
+    Router::connect('/tolet', array('controller' => 'properties', 'action' => 'index', 'tolet'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
 /**

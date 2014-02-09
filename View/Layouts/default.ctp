@@ -29,8 +29,9 @@ $cakeDescription = __d('cake_dev', 'Love Estate Agent');
 	<?php
 		echo $this->Html->meta('icon');
 
+        echo $this->Html->css('custom');
 		echo $this->Html->css('bootstrap');
-            echo $this->Html->css('bootstrap-responsive');
+        echo $this->Html->css('bootstrap-responsive');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

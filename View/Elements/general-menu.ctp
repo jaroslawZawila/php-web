@@ -3,7 +3,7 @@
     <li class="nav-divider"/>
     <li class="divider"><a href="/about">About</a></li>
     <li class="divider-vertical"><a href="/forsale">For Sale</a></li>
-    <li class="divider-vertical"><a href="#">To Let</a></li>
+    <li class="divider-vertical"><a href="/tolet">To Let</a></li>
     <li class="divider-vertical"><a href="#">Sellers</a></li>
     <li class="divider-vertical"><a href="#">Landlords</a></li>
     <li class="divider-vertical"><a href="/contact">Contact</a></li>

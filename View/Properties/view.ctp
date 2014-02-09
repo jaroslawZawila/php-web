@@ -1,101 +1,43 @@
-<div class="properties view">
-<h2><?php echo __('Property'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Price'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['price']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Beds'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['beds']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Baths'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['baths']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Garden'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['garden']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Parking'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['parking']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Hometype'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['hometype']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Year'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['year']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Status'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['status']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Featured'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['featured']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Hide'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['hide']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Description'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['description']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Postcode'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['postcode']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Houseno'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['houseno']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Street'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['street']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('City'); ?></dt>
-		<dd>
-			<?php echo h($property['Property']['city']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Customers'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($property['Customers']['id'], array('controller' => 'customers', 'action' => 'view', $property['Customers']['id'])); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<div class="row-fluid">
+    <div class="span7 offset2">
+        <div class="panel panel-info">
+            <div class="panel panel-heading">
+                <h2 class="panel-title">
+                    <?php echo h($property['Property']['street'] . ', ' .
+                            $property['Property']['city'] .
+                            ', price £' . $property['Property']['price']); ?></h2>
+            </div>
+            <div class="panel-body">
+                <div id="master-img">
+                <?php echo $this->Html->image('noimage.jpg', array('alt' => 'NO IMAGE', 'border' => '0','width'=>'100%', 'height'=>'100%'
+                        )); ?>
+                </div>
+                <div id="small-imgs"></div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="panel-body span12">
+                            <div class="span6">
+                                <p><b>Bedrooms</b>: <?php echo ($property['Property']['beds']) ?></p>
+                                <p><b>Garden</b>: <?php echo ($property['Property']['garden']) ?></p>
+                                <p><b>Year of build:</b>: <?php echo ($property['Property']['year']) ?></p>
+                                <p><b>Status:</b>: <?php echo ($property['Property']['status']) ?></p>
+                            </div>
+                            <div class="span6">
+                                <p><b>Bathrooms</b>: <?php echo ($property['Property']['baths']) ?></p>
+                                <p><b>Parking</b>: <?php echo ($property['Property']['parking']) ?></p>
+                                <p><b>Type</b>: <?php echo ($property['Property']['hometype']) ?></p>
+                            </div>
+                            <div class="span12">
+                                <hr class="span10 offset1"/>
+                                <b>Description: </b>
+                                <p><?php echo ($property['Property']['description']) ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Property'), array('action' => 'edit', $property['Property']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Property'), array('action' => 'delete', $property['Property']['id']), null, __('Are you sure you want to delete # %s?', $property['Property']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Properties'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Property'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Customers'), array('controller' => 'customers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Customers'), array('controller' => 'customers', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+
+

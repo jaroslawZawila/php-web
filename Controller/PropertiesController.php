@@ -25,7 +25,7 @@ class PropertiesController extends AppController {
  *
  * @return void
  */
-    function min() {
+    function saleprices() {
         return array('100000' => "£ 100,000",
             '110000' => "£ 110,000",
             '120000' => "£ 120,000",
@@ -33,9 +33,25 @@ class PropertiesController extends AppController {
             '140000' => "£ 140,000");
     }
 
-    function buildquery($params) {
+    function letprices() {
+        return array('100' => "£100 PCM",
+            '200' => "£200 PCM",
+            '300' => "£300 PCM",
+            '400' => "£400 PCM",
+            '500' => "£500 PCM",
+            '600' => "£600 PCM",
+            '700' => "£700 PCM",
+            '800' => "£800 PCM",
+            '900' => "£900 PCM",
+            '1000' => "£1000 PCM",
+            '1250' => "£1250 PCM",
+            '1500' => "£1500 PCM",
+            '1750' => "£1750 PCM",
+            '2000' => "£2000 PCM");
+    }
+
+    function buildquery($conditions, $params) {
 //
-        $conditions = array();
         if(!empty($this->params->query['mina'])){
           $conditions = $conditions + array('Property.price >=' => $this->params->query['mina']);
         }
@@ -55,19 +71,51 @@ class PropertiesController extends AppController {
         return $conditions;
     }
 
-	public function index() {
+    function featureds($conditions) {
+        $conditions = $conditions + array(
+            'Property.featured =' => 'yes');
+        return $conditions;
+    }
 
+    function tolet(){
+        $conditions = array('Property.addtype =' => 'let');
+
+        $this->set('properties', $this->Property->find('all', array(
+            'conditions' => $this->buildquery($conditions, $this->params->query)
+        )));
+
+        $this->set('featureds', $this->Property->find('all', array(
+            'conditions' => $this->featureds($conditions)
+        )));
+        $this->set('minmax', $this->letprices());
+        $this->set('resultstitle', 'To let:');
+    }
+
+    function forsell(){
+        $conditions = array('Property.addtype =' => 'sale');
+
+        $this->set('properties', $this->Property->find('all', array(
+            'conditions' => $this->buildquery($conditions, $this->params->query)
+        )));
+
+        $this->set('featureds', $this->Property->find('all', array(
+            'conditions' => $this->featureds($conditions)
+        )));
+        $this->set('minmax', $this->saleprices());
+        $this->set('resultstitle', 'For sell:');
+    }
+
+	public function index($type) {
+
+        if($type == 'tolet') {
+            $this->tolet();
+        }else {
+            $this->forsell();
+        }
         if(!empty($this->params->query)){
             $this->params->data = array('Search' => $this->params->query);
         }
-        $this->set('properties', $this->Property->find('all', array(
-            'conditions' => $this->buildquery($this->params->query)
-        )));
 
-        $this->set('featured', $this->Property->find('all', array(
-            'conditions' => $this->buildquery($this->params->query)
-        )));
-        $this->set('minmax', $this->min());
 	}
 
 

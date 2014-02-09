@@ -9,10 +9,10 @@
             </div>
         </div>
     </div>
-    <div class="span8">
+    <div class="span7">
         <div class="panel panel-info">
             <div class="panel panel-heading">
-                <h2 class="panel-title">Results</h2>
+                <h2 class="panel-title"><?php echo $resultstitle ?></h2>
             </div>
             <div class="panel-body">
                 <div class="properties index">
@@ -25,17 +25,12 @@
             </div>
         </div>
     </div>
-    <div class="span2">
-        <div class="panel panel-info">
-            <div class="panel panel-heading">
-                <h2 class="panel-title">Featured</h2>
-            </div>
-            <div class="panel-body">
-                <p>Featured.</p>
-
-            </div>
-        </div>
+    <div class="span3">
+        <?php foreach ($featureds as $featured):
+                echo $this->element('featured', array('featured'=>$featured))?>
+        <?php endforeach; ?>
     </div>
 </div>
+        <!--<?php echo $this->element('sql_dump'); ?>-->
 
 
