@@ -8,7 +8,7 @@
                 <b><?php echo ($property['Property']['street']) . ' , ' . ($property['Property']['city']) ?></b>
                 <b style="color:red; float: right"><?php echo '£ ' . ($property['Property']['price'])?></b>
                 <div><br/>
-                    <?php echo ($property['Property']['description']) ?>
+                    <?php echo substr(($property['Property']['description']),0, 150 )?>
                     <?php echo $this->Html->link('more...', array('action' => 'view', $property['Property']['id'])); ?>
                 </div>
                 <div><br/>
