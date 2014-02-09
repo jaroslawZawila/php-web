@@ -1,1 +1,1 @@
-<?php $this->render("/Properties/add") ?>
+home

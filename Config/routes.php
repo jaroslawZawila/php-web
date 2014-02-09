@@ -30,6 +30,8 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
     Router::connect('/about', array('controller' => 'pages', 'action' => 'display', 'about'));
+    Router::connect('/home', array('controller' => 'home', 'action' => 'index'));
+    Router::connect('/landlords', array('controller' => 'pages', 'action' => 'display', 'landlords'));
     Router::connect('/contact', array('controller' => 'requests', 'action' => 'add'));
     Router::connect('/forsale', array('controller' => 'properties', 'action' => 'index', 'forsale'));
     Router::connect('/tolet', array('controller' => 'properties', 'action' => 'index', 'tolet'));

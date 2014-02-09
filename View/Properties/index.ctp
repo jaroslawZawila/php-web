@@ -4,7 +4,7 @@
             <div class="panel panel-heading">
                 <h2 class="panel-title">Search:</h2>
             </div>
-            <div class="pnel-body">
+            <div class="panel-body" style="padding: 4px">
                 <?php echo $this->element('search') ?>
             </div>
         </div>

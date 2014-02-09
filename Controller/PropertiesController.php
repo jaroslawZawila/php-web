@@ -56,7 +56,7 @@ class PropertiesController extends AppController {
           $conditions = $conditions + array('Property.price >=' => $this->params->query['mina']);
         }
         if(!empty($this->params->query['max'])){
-            $conditions = $conditions + array('Property.price <' => $this->params->query['max']);
+            $conditions = $conditions + array('Property.price <=' => $this->params->query['max']);
         }
         if(!empty($this->params->query['minbeds'])){
             $conditions = $conditions + array('Property.beds >=' => $this->params->query['minbeds']);
