@@ -12,70 +12,41 @@
         </div>
         <div class="panel panel-info">
             <div class="panel panel-heading">
-                <h2 class="panel-title">Full Property Management</h2>
+                <h2 class="panel-title">£599 upfront fee plus FREE EPC</h2>
             </div>
             <div class="panel-body">
-                <p>If you find you do not have the time to dedicate to managing your property then this is the service for
-                    you. We will find suitable tenants, look after your home 24hrs a day, carry out regular inspections
-                    and deal with any issues as they arise immediately, keeping you informed  at all times. Please refer
-                    to our service check list to see all this service includes.</p>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">Our Commitment to you:</li>
+                    <li class="list-group-item ">Provide a realistic and honest valuation of your property</li>
+                    <li class="list-group-item ">Prepare accurate sales particulars including floor plan and full colour digital photographs</li>
+                    <li class="list-group-item ">Erect a for sale board at your property</li>
+                    <li class="list-group-item ">Gain and deliver feedback following each viewing</li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning">Optional Services Available:</li>
+                    <li class="list-group-item ">Sales Progression from offer through to completion (£150 plus vat)</li>
+                </ul>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-danger">All you need to do is:</li>
+                    <li class="list-group-item ">Carry out all viewings on your property at a time that suits you</li>
+                    <li class="list-group-item ">Settle the marketing fee of £599 upfront</li>
+                </ul>
             </div>
         </div>
         <div class="panel panel-info">
             <div class="panel panel-heading">
-                <h2 class="panel-title">Introduction Only Service</h2>
+                <h2 class="panel-title">£1499 fully inclusive package, plus FREE EPC</h2>
             </div>
             <div class="panel-body">
-                <p>We will find and reference potential tenants for you, prepare all legal documents, collect initial rent
-                    and deposits and lodge this with a recognised deposit protection scheme. We will then hand the property
-                    back to you once the tenants have moved in for you to manage. Please refer to our service check list.</p>
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel panel-heading">
-                <h2 class="panel-title">What are the legal obligations of a Landlord?</h2>
-            </div>
-            <div class="panel-body">
-                <p>If your property has gas central heating, or gas appliances then a landlord Gas Safety Certificate must
-                    be obtained. It is a legal requirement for this check to be carried out annually, and must be completed
-                    by a Gas Safe registered engineer.</p>
-                <p>Due to safety regulations all mains electrical equipment new or second-hand must be checked on a regular
-                    basis to ensure it is safe.</p>
-                <p>An Energy Performance Certificate is required for any rental property and is valid for 10 years.</p>
-                <p>The deposit must be registered with a recognised scheme. We use The Deposit Protection Service.</p>
-            </div>
-        </div>
-        <div class="panel panel-info">
-            <div class="panel panel-heading">
-                <h2 class="panel-title">OUR SERVICE CHECK LIST</h2>
-            </div>
-            <div class="panel-body">
-                <div class="span12">
-                    <div class="span4">
-                        <div><br></br></div>
-                        <div>Marketing</div>
-                        <div>Accompanied viewings & feedback</div>
-                        <div>Full referencing</div>
-                        <div>Check in & Inventory</div>
-                        <div>Key Holding</div>
-                    </div>
-                    <div class="span4">
-                        <div>Full Property Management</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                    </div>
-                    <div class="span4">
-                        <div>Introduction Only Service</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div>yes</div>
-                        <div style="color: red">no</div>
-                        <div style="color: red">no</div>
-                    </div>
-                </div>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">Our Commitment to you:</li>
+                    <li class="list-group-item ">Carry out all viewings on your property, giving you 24 hours notice</li>
+                    <li class="list-group-item ">Prepare accurate sales particulars including floor plan and full colour digital photographs</li>
+                    <li class="list-group-item ">Provide you with regular updates regarding the marketing of your property</li>
+                    <li class="list-group-item ">Gain and deliver feedback following each viewing</li>
+                    <li class="list-group-item ">Negotiate all offers on your property</li>
+                    <li class="list-group-item ">Progress your sale and purchase, if necessary, from offer through to completion</li>
+                </ul>
             </div>
         </div>
     </div>
