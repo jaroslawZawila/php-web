@@ -9,7 +9,7 @@ App::uses('AppController', 'Controller');
 class RequestsController extends AppController {
 
     public function beforeFilter() {
-        $this->Auth->allow('add'); // We can remove this line after we're finished
+        $this->Auth->allow(); // We can remove this line after we're finished
     }
 
 /**
@@ -25,8 +25,8 @@ class RequestsController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Request->recursive = 0;
-		$this->set('requests', $this->Paginator->paginate());
+
+		$this->set('requests', $this->Request->getRequests());
 	}
 
 /**
@@ -42,6 +42,7 @@ class RequestsController extends AppController {
 		}
 		$options = array('conditions' => array('Request.' . $this->Request->primaryKey => $id));
 		$this->set('request', $this->Request->find('first', $options));
+        $this->set('id', $id);
 	}
 
 /**
@@ -52,7 +53,7 @@ class RequestsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Request->create();
-			if ($this->Request->save($this->request->data)) {
+			if ($this->Request->save($this->request->data, array('fieldList' => array('name','email','phone','type','message'))) ) {
 				$this->Session->setFlash('The request has been send.','default', array('class' => 'alert alert-success', 'style' => 'font-size:medium;'));
 				$this->request->data = null;
 			} else {

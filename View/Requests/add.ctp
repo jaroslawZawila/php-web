@@ -48,7 +48,7 @@
                             <div class="input-group">
                                 <span class="input-group-addon">I am a</span>
                                 <?php echo $this->Form->input('type', array('class' => 'form-control',
-                                        'options' => array('Landlord', 'Tenant', 'Seller', 'Buyer'))); ?>
+                                        'options' => array('Landlord' => 'Landlord', 'Tenant' => 'Tenant', 'Seller' => 'Seller', 'Buyer' => 'Buyer'))); ?>
                             </div>
                             <br/>
                             <div class="input-group">

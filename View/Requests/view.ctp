@@ -1,3 +1,15 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="panel panel-info">
+            <div class="panel panel-heading">
+                <h2 class="panel-title">Request NO:  <?php echo $id ?></h2>
+            </div>
+            <div class="panel-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="requests view">
 <h2><?php echo __('Request'); ?></h2>
 	<dl>

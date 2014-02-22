@@ -38,6 +38,8 @@
     Router::connect('/tolet', array('controller' => 'properties', 'action' => 'index', 'tolet'));
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
+    Router::connect('/admin/request/view', array('controller' => 'requests', 'action' => 'index'));
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

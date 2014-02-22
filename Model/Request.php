@@ -13,6 +13,14 @@ class Request extends AppModel {
  */
 	public $displayField = 'name';
 
+    public function getRequestCount() {
+        return $this->find('count');
+    }
+
+    public function getRequests() {
+
+        return $this->find('all', array('fields' => array('id','name', 'type', 'status', 'date'), 'contain' => array()));
+    }
 /**
  * Validation rules
  *
