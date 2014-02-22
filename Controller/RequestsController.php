@@ -4,10 +4,12 @@ App::uses('AppController', 'Controller');
  * Requests Controller
  *
  * @property Request $Request
+ * @property Requestdetail $Requestdetail
  * @property PaginatorComponent $Paginator
  */
 class RequestsController extends AppController {
 
+    public $uses = array('Requestdetail', 'Request');
     public function beforeFilter() {
         $this->Auth->allow(); // We can remove this line after we're finished
     }
@@ -42,9 +44,29 @@ class RequestsController extends AppController {
 		}
 		$options = array('conditions' => array('Request.' . $this->Request->primaryKey => $id));
 		$this->set('request', $this->Request->find('first', $options));
-        $this->set('id', $id);
+        $this->set('comments', $this->Requestdetail->find('all', array('conditions' => array('Requestdetail.requests_id'=> $id),
+                                                                        'order' => array('Requestdetail.date DESC'))));
 	}
 
+
+    public function applyStatus() {
+        if ($this->request->is('post')) {
+            $data = array('requests_id' => $this->request->data['Request']['requests_id'],
+                          'comment' => "Status changed to " . $this->request->data['Request']['status']);
+
+            $this->Request->read(null, $this->request->data['Request']['requests_id']);
+            $this->Request->set(array('status' => $this->request->data['Request']['status']));
+            $this->Request->save();
+
+            $this->Requestdetail->create();
+            if ($this->Requestdetail->save($data,  array('fieldList' => array('comment', 'requests_id')))) {
+
+            } else {
+                $this->Session->setFlash(__('The request could not be updated. Please, try again.'));
+            }
+        }
+        return $this->redirect(array('controller'=> 'requests', 'action' => 'view', $this->request->data['Request']['requests_id']));
+    }
 /**
  * add method
  *

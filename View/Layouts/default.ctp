@@ -27,12 +27,12 @@ $cakeDescription = __d('cake_dev', 'Love Estate Agent');
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
+        echo $this->Html->script('jquery-1.9.0');
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('bootstrap');
         echo $this->Html->css('bootstrap-responsive');
         echo $this->Html->script('bootstrap');
-        echo $this->Html->script('jquery-1.9.0');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
