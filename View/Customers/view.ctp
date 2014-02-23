@@ -1,59 +1,45 @@
-<div class="customers view">
-<h2><?php echo __('Customer'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Type'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['type']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Firstname'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['firstname']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Surname'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['surname']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Postcode'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['postcode']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Houseno'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['houseno']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Street'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['street']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('City'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['city']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Email'); ?></dt>
-		<dd>
-			<?php echo h($customer['Customer']['email']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+<div class="row-fluid">
+<div class="span12">
+    <div class="panel panel-info">
+        <div class="panel panel-heading">
+            <h2 class="panel-title">Customer: <?php echo h($customer['Customer']['firstname']); ?>  <?php echo h($customer['Customer']['surname']); ?></h2>
+        </div>
+        <div class="panel-body">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#basicdetails" data-toggle="tab">Basic details</a></li>
+                    <li><a href="#viewing" data-toggle="tab">Viewing</a></li>
+                    <li><a href="#docs" data-toggle="tab">Documents</a></li>
+                    <li><a href="#properties" data-toggle="tab">Properties</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="basicdetails">
+                    <table class="table">
+                        <tr>
+                            <td><b>Type:</b></td>
+                            <td colspan="3"><?php echo h($customer['Customer']['type']); ?></td>
+                        </tr>
+                        <tr>
+                            <td><b>Firstname</b></td>
+                            <td><?php echo h($customer['Customer']['firstname']); ?></td>
+                            <td><b>Surname:</b></td>
+                            <td><?php echo h($customer['Customer']['surname']); ?></td>
+                        </tr>
+                        <tr>
+                            <td><b>Email:</b></td>
+                            <td><?php echo h($customer['Customer']['email']); ?></td>
+                            <td><b>Phone:</b></td>
+                            <!--<td><?php echo h($customer['Customer']['phone']); ?></td>-->
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-pane" id="viewing">... viewing ...</div>
+                <div class="tab-pane" id="docs">... docs ...</div>
+                <div class="tab-pane" id="properties">...</div>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Customer'), array('action' => 'edit', $customer['Customer']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Customer'), array('action' => 'delete', $customer['Customer']['id']), null, __('Are you sure you want to delete # %s?', $customer['Customer']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Customers'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Customer'), array('action' => 'add')); ?> </li>
-	</ul>
 </div>

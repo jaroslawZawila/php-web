@@ -11,7 +11,7 @@ class RequestsController extends AppController {
 
     public $uses = array('Requestdetail', 'Request');
     public function beforeFilter() {
-        $this->Auth->allow(); // We can remove this line after we're finished
+        $this->Auth->allow('add'); // We can remove this line after we're finished
     }
 
 /**

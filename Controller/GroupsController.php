@@ -106,4 +106,38 @@ class GroupsController extends AppController {
    // For CakePHP 2.1 and up
         $this->Auth->allow();
     }
+
+//    public function beforeFilter() {
+//        parent::beforeFilter();
+//        $this->Auth->allow('initDB'); // We can remove this line after we're finished
+//    }
+
+    public function initDB() {
+        $group = $this->User->Group;
+
+        // Allow admins to everything
+        $group->id = 7;
+        $this->Acl->allow($group, 'controllers');
+
+        // allow managers to posts and widgets
+//        $group->id = 2;
+//        $this->Acl->deny($group, 'controllers');
+//        $this->Acl->allow($group, 'controllers/Posts');
+//        $this->Acl->allow($group, 'controllers/Widgets');
+
+        // allow users to only add and edit on posts and widgets
+//        $group->id = 3;
+//        $this->Acl->deny($group, 'controllers');
+//        $this->Acl->allow($group, 'controllers/Posts/add');
+//        $this->Acl->allow($group, 'controllers/Posts/edit');
+//        $this->Acl->allow($group, 'controllers/Widgets/add');
+//        $this->Acl->allow($group, 'controllers/Widgets/edit');
+
+        // allow basic users to log out
+        $this->Acl->allow($group, 'controllers/users/logout');
+
+        // we add an exit to avoid an ugly "missing views" error message
+        echo "all done";
+        exit;
+    }
 }

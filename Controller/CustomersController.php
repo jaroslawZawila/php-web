@@ -8,10 +8,10 @@ App::uses('AppController', 'Controller');
  */
 class CustomersController extends AppController {
 
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow(); // We can remove this line after we're finished
-    }
+//    public function beforeFilter() {
+//        parent::beforeFilter();
+//        $this->Auth->allow(); // We can remove this line after we're finished
+//    }
 
 /**
  * Components
@@ -55,7 +55,7 @@ class CustomersController extends AppController {
 			$this->Customer->create();
 			if ($this->Customer->save($this->request->data)) {
 				$this->Session->setFlash(__('The customer has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', $this->Customer->id));
 			} else {
 				$this->Session->setFlash(__('The customer could not be saved. Please, try again.'));
 			}
