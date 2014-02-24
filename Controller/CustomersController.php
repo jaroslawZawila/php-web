@@ -8,6 +8,7 @@ App::uses('AppController', 'Controller');
  */
 class CustomersController extends AppController {
 
+    public $uses = array('Customer', 'Property', 'Doc', 'Offer', 'Viewing');
 //    public function beforeFilter() {
 //        parent::beforeFilter();
 //        $this->Auth->allow(); // We can remove this line after we're finished
@@ -43,11 +44,13 @@ class CustomersController extends AppController {
 		}
 		$options = array('conditions' => array('Customer.' . $this->Customer->primaryKey => $id));
 		$this->set('customer', $this->Customer->find('first', $options));
+        $this->set('properties', $this->Property->find('all', array('conditions'=>array('Property.customers_id' => $id))));
+        $this->set('docs', $this->Doc->find('all', array('conditions'=>array('Doc.customers_id' => $id))));
+        $this->set('viewings', $this->Viewing->find('all', array('conditions'=>array('Viewing.customers_id' => $id))));
 	}
 
 /**
  * add method
- *
  * @return void
  */
 	public function add() {

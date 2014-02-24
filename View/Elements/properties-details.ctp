@@ -1,0 +1,1 @@
+<?php if ( count($properties) == 0) { echo '<div class="alert alert-warning">Sorry there are not properties attached to this customer</div>'; }; ?>

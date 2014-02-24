@@ -21,7 +21,7 @@
                             <td colspan="3"><?php echo h($customer['Customer']['type']); ?></td>
                         </tr>
                         <tr>
-                            <td><b>Firstname</b></td>
+                            <td><b>Firstname:</b></td>
                             <td><?php echo h($customer['Customer']['firstname']); ?></td>
                             <td><b>Surname:</b></td>
                             <td><?php echo h($customer['Customer']['surname']); ?></td>
@@ -34,9 +34,9 @@
                         </tr>
                     </table>
                 </div>
-                <div class="tab-pane" id="viewing">... viewing ...</div>
-                <div class="tab-pane" id="docs">... docs ...</div>
-                <div class="tab-pane" id="properties">...</div>
+                <div class="tab-pane" id="viewing"><?php echo $this->element('viewing-customer', array('viewings' => $viewings)) ?></div>
+                <div class="tab-pane" id="docs"><?php echo $this->element('docs-customer', array('docs' => $docs)) ?></div>
+                <div class="tab-pane" id="properties"><?php echo $this->element('properties-details', array('properties' => $properties)) ?></div>
             </div>
 
         </div>
