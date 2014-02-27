@@ -43,10 +43,17 @@ class CustomersController extends AppController {
 			throw new NotFoundException(__('Invalid customer'));
 		}
 		$options = array('conditions' => array('Customer.' . $this->Customer->primaryKey => $id));
-		$this->set('customer', $this->Customer->find('first', $options));
+        $customer = $this->Customer->find('first', $options);
+		$this->set('customer', $customer);
         $this->set('properties', $this->Property->find('all', array('conditions'=>array('Property.customers_id' => $id))));
         $this->set('docs', $this->Doc->find('all', array('conditions'=>array('Doc.customers_id' => $id))));
         $this->set('viewings', $this->Viewing->find('all', array('conditions'=>array('Viewing.customers_id' => $id))));
+
+        if($customer['Customer']['type'] == 'Tenant' or $customer['Customer']['type'] == 'Buyer') {
+            $this->set('visible', 'hide');
+        } else {
+            $this->set('visible', '');
+        }
 	}
 
 /**

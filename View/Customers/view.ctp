@@ -10,7 +10,7 @@
                     <li class="active"><a href="#basicdetails" data-toggle="tab">Basic details</a></li>
                     <li><a href="#viewing" data-toggle="tab">Viewing</a></li>
                     <li><a href="#docs" data-toggle="tab">Documents</a></li>
-                    <li><a href="#properties" data-toggle="tab">Properties</a></li>
+                    <li class=<?php echo $visible ?> ><a href="#properties" data-toggle="tab">Properties</a></li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="tab-pane" id="viewing"><?php echo $this->element('viewing-customer', array('viewings' => $viewings)) ?></div>
                 <div class="tab-pane" id="docs"><?php echo $this->element('docs-customer', array('docs' => $docs)) ?></div>
-                <div class="tab-pane" id="properties"><?php echo $this->element('properties-details', array('properties' => $properties)) ?></div>
+                <div class="tab-pane" id="properties" ><?php echo $this->element('properties-details', array('properties' => $properties, 'customerid' => $customer['Customer']['id'] )) ?></div>
             </div>
 
         </div>

@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  */
 class PropertiesController extends AppController {
 
-
+    public $uses = array('Property', 'Photo');
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow(); // We can remove this line after we're finished
@@ -94,9 +94,8 @@ class PropertiesController extends AppController {
     function forsell(){
         $conditions = array('Property.addtype =' => 'sale');
 
-        $this->set('properties', $this->Property->find('all', array(
-            'conditions' => $this->buildquery($conditions, $this->params->query)
-        )));
+        $this->set('properties', $this->Property->get_all_sell($this->buildquery($conditions, $this->params->query)));
+
 
         $this->set('featureds', $this->Property->find('all', array(
             'conditions' => $this->featureds($conditions)
@@ -137,8 +136,7 @@ class PropertiesController extends AppController {
 		if (!$this->Property->exists($id)) {
 			throw new NotFoundException(__('Invalid property'));
 		}
-		$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
-		$this->set('property', $this->Property->find('first', $options));
+		$this->set('property', $this->Property->view_properties($id));
 	}
 
 /**
@@ -146,18 +144,22 @@ class PropertiesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($customerid = null) {
 		if ($this->request->is('post')) {
 			$this->Property->create();
+            $this->request->data['Property']['customers_id'] = $customerid;
+            if($this->request->data['Property']['addtype'] == 'forsale') {
+                $this->request->data['Property']['status'] = 'for sale';
+            }else {
+                $this->request->data['Property']['status'] = 'to let';
+            };
+
 			if ($this->Property->save($this->request->data)) {
-				$this->Session->setFlash(__('The property has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'manage', $this->Property->getLastInsertId()));
 			} else {
 				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
 			}
 		}
-		$customers = $this->Property->Customer->find('list');
-		$this->set(compact('customers'));
 	}
 
 /**
@@ -182,10 +184,17 @@ class PropertiesController extends AppController {
 			$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
 			$this->request->data = $this->Property->find('first', $options);
 		}
-		$customers = $this->Property->Customer->find('list');
-		$this->set(compact('customers'));
+//		$customers = $this->Property->Customer->find('list');
+//		$this->set(compact('customers'));
 	}
 
+
+    public function manage($id = null) {
+        if (!$this->Property->exists($id)) {
+            throw new NotFoundException(__('Invalid property'));
+        }
+        $this->set('property', $this->Property->view_properties($id));
+    }
 /**
  * delete method
  *

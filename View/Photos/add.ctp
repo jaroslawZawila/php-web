@@ -1,12 +1,11 @@
 <div class="photos form">
-<?php echo $this->Form->create('Photo'); ?>
+<?php echo $this->Form->create('Photo', array('url' => array('action' => 'create'), 'enctype' => 'multipart/form-data')); ?>
 	<fieldset>
 		<legend><?php echo __('Add Photo'); ?></legend>
 	<?php
 		echo $this->Form->input('description');
 		echo $this->Form->input('master');
-		echo $this->Form->input('photo');
-		echo $this->Form->input('properties_id');
+		echo $this->Form->input('photo',array('type' => 'file'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

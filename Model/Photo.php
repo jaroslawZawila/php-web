@@ -7,6 +7,10 @@ App::uses('AppModel', 'Model');
  */
 class Photo extends AppModel {
 
+
+    public function gets($id) {
+        return $this->find('all', array('conditions' => array('Photo.properties_id' => $id)));
+    }
 /**
  * Validation rules
  *

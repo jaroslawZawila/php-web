@@ -7,10 +7,47 @@ App::uses('AppModel', 'Model');
  */
 class Property extends AppModel {
 
+
+    public function get_all_sell ($conditions = null) {
+        $properties = $this->find('all', array('fields' => array('Photo.*', 'Property.*'),
+            'conditions' => $conditions,
+            'group' => array('Property.id'),
+            'joins' => array(
+            array(
+                'table' => 'photos',
+                'alias' => 'Photo',
+                'type' => 'left',
+                'conditions'=> array('Property.id = Photo.properties_id')
+            )
+        )));
+
+        return $properties;
+    }
+
+    public function view_properties ($id) {
+        $options = array('Property.id' => $id);
+        $properties = $this->find('first', array('fields' => array('Photo.*', 'Property.*'),
+            'conditions' => $options,
+            'joins' => array(
+                array(
+                    'table' => 'photos',
+                    'alias' => 'Photo',
+                    'type' => 'inner',
+                    'conditions'=> array('Property.id = Photo.properties_id')
+                )
+            )));
+
+        if($properties == null) {
+            $properties = $this->find('first',array( 'conditions' => $options ));
+            $properties['Photo']['url'] = 'noimage.jpg' ;
+        }
+        return $properties;
+    }
+
 /**
  * Validation rules
  *
- * @var array
+ * @var arrays
  */
 	public $validate = array(
 		'price' => array(
@@ -133,7 +170,7 @@ class Property extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 			'postal' => array(
-				'rule' => array('postal'),
+				'rule' => array('postal', null, 'uk'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -200,13 +237,13 @@ class Property extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array(
-		'Customers' => array(
-			'className' => 'Customers',
-			'foreignKey' => 'customers_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+//	public $belongsTo = array(
+//		'Customers' => array(
+//			'className' => 'Customers',
+//			'foreignKey' => 'customers_id',
+//			'conditions' => '',
+//			'fields' => '',
+//			'order' => ''
+//		)
+//	);
 }

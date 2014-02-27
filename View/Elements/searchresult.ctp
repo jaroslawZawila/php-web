@@ -2,7 +2,7 @@
     <div class="panel-body">
         <div class="row-fluid">
             <div class="span3">
-                <?php echo $this->Html->image('noimage.jpg', array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
+                <?php echo $this->Html->image('properties/' . $property['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
                         'url' =>  array('action' => 'view', $property['Property']['id']))); ?>
             </div>
             <div class="span9">
