@@ -17,7 +17,7 @@
 
                     </div>
                     <div class="tab-pane" id="photos">
-                        <?php print_r($property) ?>
+                       <?php echo $this->element('photo-manager'); ?>
                     </div>
                     <div class="tab-pane" id="docs">... docs ...</div>
                 </div>

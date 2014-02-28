@@ -80,9 +80,10 @@ class PropertiesController extends AppController {
     function tolet(){
         $conditions = array('Property.addtype =' => 'let');
 
-        $this->set('properties', $this->Property->find('all', array(
-            'conditions' => $this->buildquery($conditions, $this->params->query)
-        )));
+//        $this->set('properties', $this->Property->find('all', array(
+//            'conditions' => $this->buildquery($conditions, $this->params->query)
+//        )));
+        $this->set('properties', $this->Property->get_all_sell($this->buildquery($conditions, $this->params->query)));
 
         $this->set('featureds', $this->Property->find('all', array(
             'conditions' => $this->featureds($conditions)
@@ -95,7 +96,6 @@ class PropertiesController extends AppController {
         $conditions = array('Property.addtype =' => 'sale');
 
         $this->set('properties', $this->Property->get_all_sell($this->buildquery($conditions, $this->params->query)));
-
 
         $this->set('featureds', $this->Property->find('all', array(
             'conditions' => $this->featureds($conditions)
@@ -194,6 +194,7 @@ class PropertiesController extends AppController {
             throw new NotFoundException(__('Invalid property'));
         }
         $this->set('property', $this->Property->view_properties($id));
+        $this->set('photos', $this->Photo->gets($id));
     }
 /**
  * delete method

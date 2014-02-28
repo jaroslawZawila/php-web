@@ -71,35 +71,38 @@ class PhotosController extends AppController {
             //Check if image has been uploaded
             if(!empty($this->data['Photo']['photo']['name']))
             {
+                $data = $this->data;
                 $file = $this->data['Photo']['photo']; //put the data into a var for easy use
 
                 $ext = substr(strtolower(strrchr($file['name'], '.')), 1); //get the extension
                 $arr_ext = array('jpg', 'jpeg', 'gif'); //set allowed extensions
-
                 //only process if the extension is valid
                 if(in_array($ext, $arr_ext))
                 {
-                    //do the actual uploading of the file. First arg is the tmp name, second arg is
-                    //where we are putting it
-
-                    move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/properties/' . $file['name']);
+                    $filename = 'properties/' .  $this->data['Photo']['propertyid'] . '-' . $file['name'];
+                    move_uploaded_file($file['tmp_name'], WWW_ROOT . 'img/' . $filename);
 
                     //prepare the filename for database entry
-                    $this->request->data['Photo']['url'] = $file['name'];
+                    $this->data['Photo']['url'] = $file['name'];
 
-                    $this->request->data['Photo']['properties_id'] = 1;
+                    $data['Photo']['description'] = $this->data['Photo']['description'];
+                    $data['Photo']['properties_id'] =  $this->data['Photo']['propertyid'];
+                    $data['Photo']['url'] = $filename;
+
                     //now do the save
+                    $this->set('p', $this->data);
                     $this->Photo->create();
-                    if ($this->Photo->save($this->request->data)) {
+                    if ($this->Photo->save($data)) {
                         $this->Session->setFlash(__('The photo has been saved.'));
-                        return $this->redirect(array('action' => 'index'));
                     } else {
                         $this->Session->setFlash(__('The photo could not be saved. Please, try again.'));
                     }
+                }else {
+                    $this->Session->setFlash(__('The photo could not be saved. Please, try again.'));
                 }
             }
-
         }
+        return $this->redirect(array('controller'=>'properties','action' => 'manage', $this->data['Photo']['propertyid']));
     }
 /**
  * edit method
@@ -134,14 +137,16 @@ class PhotosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function delete($id = null, $filename = null) {
 		$this->Photo->id = $id;
 		if (!$this->Photo->exists()) {
 			throw new NotFoundException(__('Invalid photo'));
 		}
 		$this->request->onlyAllow('post', 'delete');
+
+
 		if ($this->Photo->delete()) {
-			$this->Session->setFlash(__('The photo has been deleted.'));
+			$this->Session->setFlash(__('The photo has been deleted.' . $filename));
 		} else {
 			$this->Session->setFlash(__('The photo could not be deleted. Please, try again.'));
 		}

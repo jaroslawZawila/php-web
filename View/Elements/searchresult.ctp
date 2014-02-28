@@ -2,8 +2,14 @@
     <div class="panel-body">
         <div class="row-fluid">
             <div class="span3">
-                <?php echo $this->Html->image('properties/' . $property['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
-                        'url' =>  array('action' => 'view', $property['Property']['id']))); ?>
+                <?php  if( $property['Photo']['url'] != null) {
+                            $url = $property['Photo']['url'];
+                        }else {
+                            $url = 'noimage.jpg';
+                        };
+                        echo $this->Html->image($url, array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
+                        'url' =>  array('action' => 'view', $property['Property']['id'])));
+                        ?>
             </div>
             <div class="span9">
                 <b><?php echo ($property['Property']['street']) . ' , ' . ($property['Property']['city']) ?></b>

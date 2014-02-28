@@ -81,6 +81,10 @@ class Customer extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+        ),
+        'phone' => array(
+            'notEmpty' => array(
+                'rule' => array('notEmpty')        )
 		),
 	);
 }

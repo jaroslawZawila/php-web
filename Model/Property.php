@@ -39,7 +39,7 @@ class Property extends AppModel {
 
         if($properties == null) {
             $properties = $this->find('first',array( 'conditions' => $options ));
-            $properties['Photo']['url'] = 'noimage.jpg' ;
+            $properties['Photo'] = null ;
         }
         return $properties;
     }

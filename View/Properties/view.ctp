@@ -9,8 +9,11 @@
             </div>
             <div class="panel-body">
                 <div id="master-img">
-                    <?php echo $this->Html->image($property['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'100%', 'height'=>'100%'
-                            )); ?>
+                    <?php   if($property['Photo']) {
+                                echo $this->Html->image($property['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'100%', 'height'=>'100%'));
+                            }else {
+                                echo $this->Html->image('noimage.jpg', array('alt' => 'NO IMAGE', 'border' => '0','width'=>'100%', 'height'=>'100%'));
+                            }?>
                 </div>
                 <div id="small-imgs"></div>
                 <div class="panel panel-default">
