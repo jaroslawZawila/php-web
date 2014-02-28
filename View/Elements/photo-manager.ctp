@@ -37,10 +37,9 @@
 </tr>
 <?php foreach ($photos as $photo): ?>
 <tr>
-    <td><?php echo $this->Html->image($photo['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
-            'url' =>  array('action' => 'view', $property['Property']['id'])));?></td>
+    <td><?php echo $this->Html->image($photo['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px'));?></td>
     <td><b>Description:</b><p><?php echo $photo['Photo']['description'] ?></p></td>
-    <td><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'photos','action' => 'delete', $photo['Photo']['id'], $photo['Photo']['url']), null, __('Are you sure you want to delete??')); ?></td>
+    <td><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'photos','action' => 'delete', $photo['Photo']['id']), null, __('Are you sure you want to delete??')); ?></td>
 </tr>
 <?php endforeach; ?>
 </table>

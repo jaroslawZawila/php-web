@@ -137,16 +137,19 @@ class PhotosController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null, $filename = null) {
+	public function delete($id = null, $filename = null, $propertid = null) {
 		$this->Photo->id = $id;
 		if (!$this->Photo->exists()) {
 			throw new NotFoundException(__('Invalid photo'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 
+        $photo = $this->Photo->find('first', array('condition' => array('Photo.id' => $id )));
+        $file = new File('img/' . $photo['Photo']['url']);
 
 		if ($this->Photo->delete()) {
-			$this->Session->setFlash(__('The photo has been deleted.' . $filename));
+			$file->delete();
+            $this->Session->setFlash(__('The photo has been deleted.' . $photo['Photo']['url']));
 		} else {
 			$this->Session->setFlash(__('The photo could not be deleted. Please, try again.'));
 		}
