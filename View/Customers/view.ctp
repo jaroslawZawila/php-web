@@ -30,7 +30,7 @@
                             <td><b>Email:</b></td>
                             <td><?php echo h($customer['Customer']['email']); ?></td>
                             <td><b>Phone:</b></td>
-                            <!--<td><?php echo h($customer['Customer']['phone']); ?></td>-->
+                            <td><?php echo h($customer['Customer']['phone']); ?></td>
                         </tr>
                     </table>
                 </div>

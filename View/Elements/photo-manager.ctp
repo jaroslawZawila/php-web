@@ -35,6 +35,7 @@
         add photo
     </button></td>
 </tr>
+<?php if ( count($photos) == 0) { echo '<div class="alert alert-warning">Sorry there are not pictures for this properties.</div>'; }; ?>
 <?php foreach ($photos as $photo): ?>
 <tr>
     <td><?php echo $this->Html->image($photo['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px'));?></td>
