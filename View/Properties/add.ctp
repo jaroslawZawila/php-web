@@ -46,7 +46,7 @@
                         <br/>
                         <div class="input-group">
                             <span class="input-group-addon">Type:</span>
-                            <?php echo $this->Form->input('type', array('class' => 'form-control',
+                            <?php echo $this->Form->input('hometype', array('class' => 'form-control',
                                     'options' => array( 'house' => 'house','flat' => 'flat'))); ?>
                         </div>
                         <br/>

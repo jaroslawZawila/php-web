@@ -1,0 +1,1 @@
+<?php if ( count($docs) == 0) { echo '<div class="alert alert-warning">Sorry there are not pictures for this properties.</div>'; }; ?>

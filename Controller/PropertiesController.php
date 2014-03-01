@@ -148,9 +148,9 @@ class PropertiesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Property->create();
             $this->request->data['Property']['customers_id'] = $customerid;
-            if($this->request->data['Property']['addtype'] == 'forsale') {
+            if($this->request->data['Property']['addtype'] == 'sale') {
                 $this->request->data['Property']['status'] = 'for sale';
-            }else {
+            } elseif ($this->request->data['Property']['addtype'] == 'let') {
                 $this->request->data['Property']['status'] = 'to let';
             };
 
@@ -173,10 +173,15 @@ class PropertiesController extends AppController {
 		if (!$this->Property->exists($id)) {
 			throw new NotFoundException(__('Invalid property'));
 		}
+        $this->Property->id = $id;
+        if($this->request->data['Property']['addtype'] == 'sale') {
+            $this->request->data['Property']['status'] = 'for sale';
+        }elseif ($this->request->data['Property']['addtype'] == 'let') {
+            $this->request->data['Property']['status'] = 'to let';
+        };
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Property->save($this->request->data)) {
 				$this->Session->setFlash(__('The property has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
 			}
@@ -184,6 +189,7 @@ class PropertiesController extends AppController {
 			$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
 			$this->request->data = $this->Property->find('first', $options);
 		}
+        return $this->redirect(array('action' => 'manage', $id));
 //		$customers = $this->Property->Customer->find('list');
 //		$this->set(compact('customers'));
 	}
@@ -193,8 +199,27 @@ class PropertiesController extends AppController {
         if (!$this->Property->exists($id)) {
             throw new NotFoundException(__('Invalid property'));
         }
-        $this->set('property', $this->Property->view_properties($id));
+        $property = $this->Property->view_properties($id);
+
+        if($property['Property']['beds'] == 0) {
+            $property['Property']['beds'] = 'bedside';
+        }
+
+        $this->set('property', $property);
         $this->set('photos', $this->Photo->gets($id));
+        $this->set('docs', array());
+    }
+
+    public function update_description() {
+        if ($this->request->is(array('post', 'put'))) {
+            $this->Property->id = $this->request->data['Property']['id'];
+            if ($this->Property->save($this->request->data)) {
+                $this->Session->setFlash(__('The description has been updated.'));
+            } else {
+                $this->Session->setFlash(__('The description could not be updated. Please, try again.'));
+            }
+        }
+            return $this->redirect(array('action' => 'manage', $this->request->data['Property']['id']));
     }
 /**
  * delete method
