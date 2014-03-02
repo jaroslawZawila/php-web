@@ -5,8 +5,9 @@
                 <h2 class="panel-title">
                     <?php echo h($property['Property']['street'] . ', ' .
                             $property['Property']['city'] .
-                            ', price £' . $property['Property']['price']); ?></h2>
-                <a href="javascript:history.go(-1)">GO BACK</a>
+                            ', price £' . $property['Property']['price']); ?>
+                    <a class="btn btn-default" style="float: right" href="javascript:history.go(-1)">back to results</a></h2>
+
             </div>
             <div class="panel-body">
                 <div id="master-img">
