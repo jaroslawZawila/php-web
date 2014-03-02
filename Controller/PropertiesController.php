@@ -60,7 +60,6 @@ class PropertiesController extends AppController {
         }
         if(!empty($this->params->query['minbeds'])){
             $conditions = $conditions + array('Property.beds >=' => $this->params->query['minbeds']);
-            $this->Session->setflash('I am here');
         }
         if(!empty($this->params->query['maxbeds'])){
             $conditions = $conditions + array('Property.beds <=' => $this->params->query['maxbeds'] );
@@ -136,7 +135,11 @@ class PropertiesController extends AppController {
 		if (!$this->Property->exists($id)) {
 			throw new NotFoundException(__('Invalid property'));
 		}
-		$this->set('property', $this->Property->view_properties($id));
+        $property = $this->Property->view_properties($id);
+		$this->set('property', $property);
+
+        $photos = $this->Photo->gets($id);
+        $this->set('photos', $photos);
 	}
 
 /**

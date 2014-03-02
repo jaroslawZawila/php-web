@@ -17,6 +17,8 @@
             <div class="panel-body">
                 <div class="properties index">
                     <table cellpadding="0" cellspacing="0">
+                        <?php if(count($properties)==0){ echo '<div class="alert alert-danger">Sorry we cannot find
+                                any properties to match your crieteria. May be broaden you search ??? ...</div>'; }; ?>
                         <?php foreach ($properties as $property):
                                 echo $this->element('searchresult', array('property'=>$property))?>
                         <?php endforeach; ?>
