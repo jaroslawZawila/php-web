@@ -120,6 +120,11 @@ class PropertiesController extends AppController {
 
 	}
 
+    public function lists() {
+        $this->Property->recursive = 0;
+        $this->set('properties', $this->Paginator->paginate());
+    }
+
 
 /**
  * view method
