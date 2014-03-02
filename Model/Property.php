@@ -24,6 +24,23 @@ class Property extends AppModel {
         return $properties;
     }
 
+    public function get_all_featured($conditions = null) {
+        $properties = $this->find('all', array('fields' => array('Photo.*', 'Property.*'),
+            'conditions' => $conditions,
+            'group' => array('Property.id'),
+            'limit' => 3,
+            'joins' => array(
+                array(
+                    'table' => 'photos',
+                    'alias' => 'Photo',
+                    'type' => 'left',
+                    'conditions'=> array('Property.id = Photo.properties_id')
+                )
+            )));
+
+        return $properties;
+    }
+
     public function view_properties ($id) {
         $options = array('Property.id' => $id);
         $properties = $this->find('first', array('fields' => array('Photo.*', 'Property.*'),

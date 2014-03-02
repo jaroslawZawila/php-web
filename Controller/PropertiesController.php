@@ -84,21 +84,18 @@ class PropertiesController extends AppController {
 //        )));
         $this->set('properties', $this->Property->get_all_sell($this->buildquery($conditions, $this->params->query)));
 
-        $this->set('featureds', $this->Property->find('all', array(
-            'conditions' => $this->featureds($conditions)
-        )));
+        $this->set('featureds', $this->Property->get_all_featured($this->featureds($conditions)));
         $this->set('minmax', $this->letprices());
         $this->set('resultstitle', 'To let:');
     }
 
     function forsell(){
-        $conditions = array('Property.addtype =' => 'sale');
+        $conditions = array('Property.addtype =' => 'sale', 'Property.hide' => 'yes');
 
         $this->set('properties', $this->Property->get_all_sell($this->buildquery($conditions, $this->params->query)));
 
-        $this->set('featureds', $this->Property->find('all', array(
-            'conditions' => $this->featureds($conditions)
-        )));
+        $this->set('featureds', $this->Property->get_all_featured($this->featureds($conditions)));
+
         $this->set('minmax', $this->saleprices());
         $this->set('resultstitle', 'For sell:');
     }
