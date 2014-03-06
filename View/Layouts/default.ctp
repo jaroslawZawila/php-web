@@ -32,7 +32,9 @@ $cakeDescription = __d('cake_dev', 'Love Estate Agent');
 
 		echo $this->Html->css('bootstrap');
         echo $this->Html->css('bootstrap-responsive');
+        echo $this->Html->css('bootstrap-datetimepicker');
         echo $this->Html->script('bootstrap');
+        echo $this->Html->script('bootstrap-datetimepicker');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

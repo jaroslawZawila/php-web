@@ -15,6 +15,10 @@ class ViewingsController extends AppController {
  */
 	public $components = array('Paginator');
 
+        public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow(); // We can remove this line after we're finished
+    }
 /**
  * index method
  *
@@ -38,6 +42,7 @@ class ViewingsController extends AppController {
 		}
 		$options = array('conditions' => array('Viewing.' . $this->Viewing->primaryKey => $id));
 		$this->set('viewing', $this->Viewing->find('first', $options));
+
 	}
 
 /**
@@ -48,16 +53,15 @@ class ViewingsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Viewing->create();
-			if ($this->Viewing->save($this->request->data)) {
+            $this->request->data['Viewing']['status'] = 'New';
+			if ($this->Viewing->save($this->request->data,  array('fieldList' => array('comment', 'customers_id', 'properties_id', 'date', 'status')))) {
 				$this->Session->setFlash(__('The viewing has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+
 			} else {
 				$this->Session->setFlash(__('The viewing could not be saved. Please, try again.'));
 			}
 		}
-		$properties = $this->Viewing->Property->find('list');
-		$customers = $this->Viewing->Customer->find('list');
-		$this->set(compact('properties', 'customers'));
+        return $this->redirect(array('controller'=> 'customers','action' => 'view', $this->request->data['Viewing']['customers_id']));
 	}
 
 /**

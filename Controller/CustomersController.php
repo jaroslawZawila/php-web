@@ -44,10 +44,13 @@ class CustomersController extends AppController {
 		}
 		$options = array('conditions' => array('Customer.' . $this->Customer->primaryKey => $id));
         $customer = $this->Customer->find('first', $options);
-		$this->set('customer', $customer);
+        $this->set('date', date('d/m/Y h:i', time()));
+        $this->set('customer', $customer);
         $this->set('properties', $this->Property->find('all', array('conditions'=>array('Property.customers_id' => $id))));
         $this->set('docs', $this->Doc->find('all', array('conditions'=>array('Doc.customers_id' => $id))));
         $this->set('viewings', $this->Viewing->find('all', array('conditions'=>array('Viewing.customers_id' => $id))));
+        $this->set('list', $this->Property->find('list', array(
+            'fields' => array('Property.list_properties'))));
 
         if($customer['Customer']['type'] == 'Tenant' or $customer['Customer']['type'] == 'Buyer') {
             $this->set('visible', 'hide');

@@ -7,6 +7,8 @@ App::uses('AppModel', 'Model');
  */
 class Property extends AppModel {
 
+    public $virtualFields = array('list_properties' => 'concat(Property.houseno, ", ", Property.street, ", ", Property.city, ", ", Property.postcode)');
+
 
     public function get_all_sell ($conditions = null) {
         $properties = $this->find('all', array('fields' => array('Photo.*', 'Property.*'),
