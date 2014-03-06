@@ -109,7 +109,7 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect('/'));
+                return $this->redirect($this->Auth->redirect('/admin/home'));
             }
             $this->Session->setFlash(__('Your username or password was incorrect.'));
         }

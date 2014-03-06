@@ -73,14 +73,16 @@ class DATABASE_CONFIG {
 		//'encoding' => 'utf8',
 	);
 
-	public $test = array(
-		'datasource' => 'Database/Mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'test_database_name',
-		'prefix' => '',
-		//'encoding' => 'utf8',
-	);
+
+    public $test = array(
+        'datasource' => 'Database/Mysql',
+        'persistent' => false,
+        'host' => 'localhost',
+        'login' => 'root',
+        'password' => '!+root',
+        'database' => 'cake-test-2',
+        'prefix' => '',
+        'schema' => '',
+        //'encoding' => 'utf8',
+    );
 }

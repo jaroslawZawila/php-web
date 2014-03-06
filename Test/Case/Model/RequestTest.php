@@ -37,4 +37,23 @@ class RequestTest extends CakeTestCase {
 		parent::tearDown();
 	}
 
+/**
+ * testGetRequestCount method
+ *
+ * @return void
+ */
+	public function testGetRequestCount() {
+
+        $results = $this->Request->getRequestCount();
+        $this->assertEqual(1, $results);}
+
+/**
+ * testGetRequests method
+ *
+ * @return void
+ */
+	public function testGetRequests() {
+
+	}
+
 }
