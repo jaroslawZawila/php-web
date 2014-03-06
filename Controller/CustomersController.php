@@ -48,7 +48,7 @@ class CustomersController extends AppController {
         $this->set('customer', $customer);
         $this->set('properties', $this->Property->find('all', array('conditions'=>array('Property.customers_id' => $id))));
         $this->set('docs', $this->Doc->find('all', array('conditions'=>array('Doc.customers_id' => $id))));
-        $this->set('viewings', $this->Viewing->find('all', array('conditions'=>array('Viewing.customers_id' => $id))));
+        $this->set('viewings', $this->Viewing->get_viewings($id));
         $this->set('list', $this->Property->find('list', array(
             'fields' => array('Property.list_properties'))));
 

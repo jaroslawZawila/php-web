@@ -26,7 +26,7 @@ class ViewingsController extends AppController {
  */
 	public function index() {
 		$this->Viewing->recursive = 0;
-		$this->set('viewings', $this->Paginator->paginate());
+		$this->set('viewings', $this->Viewing->get_viewings_all());
 	}
 
 /**
@@ -76,19 +76,26 @@ class ViewingsController extends AppController {
 			throw new NotFoundException(__('Invalid viewing'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Viewing->save($this->request->data)) {
-				$this->Session->setFlash(__('The viewing has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+            $this->Viewing->read(null, $id);
+            $this->Viewing->set(array(
+                'date' =>  $this->request->data['Viewing']['date'],
+                'comment' => $this->request->data['Viewing']['comment'],
+                'status' => $this->request->data['Viewing']['status']
+            ));
+			if ($this->Viewing->save()) {
+				$this->Session->setFlash(__('The viewing has been updated.'));
+				return $this->redirect(array('action' => 'edit', $id));
 			} else {
 				$this->Session->setFlash(__('The viewing could not be saved. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Viewing.' . $this->Viewing->primaryKey => $id));
 			$this->request->data = $this->Viewing->find('first', $options);
+            $viewing = $this->request->data;
+            $this->set('property_address', $viewing['Properties']['houseno'] . ', ' . $viewing['Properties']['street'] . ', ' . $viewing['Properties']['city'] . ', ' . $viewing['Properties']['postcode']);
+            $this->set('customer_name', $viewing['Customers']['firstname'] . ' ' .  $viewing['Customers']['surname']);
+            $this->set('viewings', $viewing);
 		}
-		$properties = $this->Viewing->Property->find('list');
-		$customers = $this->Viewing->Customer->find('list');
-		$this->set(compact('properties', 'customers'));
 	}
 
 /**

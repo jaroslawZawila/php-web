@@ -9,6 +9,6 @@
             <li><a href="/admin/customer/add">Add new customer</a></li>
         </ul>
     </li>
-    <li class="divider-vertical"><a href="#">Viewings</a></li>
+    <li class="divider-vertical"><a href="/admin/viewings/view">Viewings</a></li>
     <li class="divider-vertical"><a href="#">Staff</a></li>
 </ul>

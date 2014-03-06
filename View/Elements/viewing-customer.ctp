@@ -1,5 +1,3 @@
-<?php if ( count($viewings) == 0) { echo '<div class="alert alert-warning">Sorry there is not viewings booked for this user.</div>'; }; ?>
-
 <div class="modal fade" id="viewingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,7 +18,7 @@
                     <br/>
                     <div class="input-group">
                         <span class="input-group-addon">Date</span>
-                        <input size="16" type="text" value="<?php echo $date ?>" readonly class="form_datetime form-control"/>
+                        <input size="16" name="data[Viewing][date]" type="text" value="<?php echo $date ?>" readonly class="form_datetime form-control"/>
 
                         <script type="text/javascript">
                             $(".form_datetime").datetimepicker({format: 'dd-mm-yyyy hh:ii'});
@@ -39,6 +37,22 @@
             </div>
         </div>
     </div>
+</div>
+
+<div>
+<table class="table">
+       <?php if ( count($viewings) == 0) { echo '<div class="alert alert-warning">Sorry there is not viewings booked for this user.</div>'; }; ?>
+       <?php foreach ($viewings as $viewing): ?>
+    <tr>
+        <td><?php echo $viewing['Viewing']['id'];?></td>
+        <td><p><?php echo $viewing['Viewing']['date'] ?></p></td>
+
+        <td><?php echo $viewing['Properties']['houseno'] . ', ' . $viewing['Properties']['street'] . ', ' . $viewing['Properties']['city'] . ', ' . $viewing['Properties']['postcode'] ?></td>
+        <td><b><?php echo $viewing['Viewing']['status'] ?></b></td>
+        <td><?php echo $this->Form->postLink('Manage', array('controller' => 'viewings','action' => 'view', $viewing['Viewing']['id'])); ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
 </div>
 <div>
     <button class="btn btn-default" data-toggle="modal" data-target="#viewingModal" name="add-viewings">

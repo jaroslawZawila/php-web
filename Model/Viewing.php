@@ -38,7 +38,17 @@ class Viewing extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
+    public function get_viewings($id) {
+        return $this->find('all', array('conditions'=>array('Viewing.customers_id' => $id),
+                                        'order' => array('Viewing.date DESC')));
+    }
+
+    public function get_viewings_all() {
+        return $this->find('all', array('order' => array('Viewing.date DESC')));
+    }
+
+
+    /**
  * belongsTo associations
  *
  * @var array
