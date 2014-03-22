@@ -111,7 +111,7 @@ class UsersController extends AppController {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect('/admin/home'));
             }
-            $this->Session->setFlash(__('Your username or password was incorrect.'));
+            $this->Session->setFlash('Your username or password was incorrect.','default', array('class' => 'alert alert-danger', 'style' => 'font-size:medium;'));
         }
     }
 
@@ -135,7 +135,7 @@ class UsersController extends AppController {
     public function initDB() {
         $group = $this->User->Group;
         //Allow admins to everything
-        $group->id = 1;
+        $group->id = 4;
         $this->Acl->allow($group, 'controllers');
 
 

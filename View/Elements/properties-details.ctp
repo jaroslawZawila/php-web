@@ -10,7 +10,7 @@
             <td colspan="2"><?php echo h($property['Property']['status']); ?>&nbsp;</td>
             <td><?php echo h($property['Property']['postcode']); ?>&nbsp;</td>
 
-            <td><?php echo $this->Html->link('Manage property', array('controller' => 'properties', 'action' => 'manage', $property['Property']['id']),
+            <td><?php echo $this->Html->link('Manage property', array('controller' => 'properties', 'action' => 'manage', $property['Property']['id'], $customerid),
                     array('class' => 'btn btn-info')); ?> </td>
         </tr>
     <?php endforeach; ?>

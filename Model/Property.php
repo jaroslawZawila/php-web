@@ -63,6 +63,10 @@ class Property extends AppModel {
         return $properties;
     }
 
+
+    public function get_properties_for_user($id) {
+        return $this->find('all', array('conditions'=>array('Property.customers_id' => $id)));
+    }
 /**
  * Validation rules
  *

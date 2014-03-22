@@ -52,6 +52,9 @@ class PropertiesController extends AppController {
 
     function buildquery($conditions, $params) {
 //
+        if(!empty($this->params->query['postcode'])){
+            $conditions = $conditions + array('Property.postcode LIKE' => strtoupper($this->params->query['postcode']) . '%');
+        }
         if(!empty($this->params->query['mina'])){
           $conditions = $conditions + array('Property.price >=' => $this->params->query['mina']);
         }
@@ -158,7 +161,7 @@ class PropertiesController extends AppController {
             } elseif ($this->request->data['Property']['addtype'] == 'let') {
                 $this->request->data['Property']['status'] = 'to let';
             };
-
+            $this->request->data['Property']['postcode'] = strtoupper($this->request->data['Property']['postcode']);
 			if ($this->Property->save($this->request->data)) {
 				return $this->redirect(array('action' => 'manage', $this->Property->getLastInsertId()));
 			} else {
@@ -200,7 +203,7 @@ class PropertiesController extends AppController {
 	}
 
 
-    public function manage($id = null) {
+    public function manage($id = null, $cid = null) {
         if (!$this->Property->exists($id)) {
             throw new NotFoundException(__('Invalid property'));
         }
@@ -213,6 +216,12 @@ class PropertiesController extends AppController {
         $this->set('property', $property);
         $this->set('photos', $this->Photo->gets($id));
         $this->set('docs', array());
+
+        if($cid == null) {
+            $this->set('back', "/admin/properties/view");
+        }else {
+            $this->set('back', "/customers/view/" . $cid);
+        }
     }
 
     public function update_description() {

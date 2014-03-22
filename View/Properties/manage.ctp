@@ -2,7 +2,7 @@
     <div class="span12">
         <div class="panel panel-info">
             <div class="panel panel-heading">
-                <h2 class="panel-title">Property manager:</h2>
+                <h2 class="panel-title">Property manager: <a href="<?php echo $back ?>" style="float: right">back</a></h2>
             </div>
             <div class="panel-body">
                 <div>

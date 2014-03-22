@@ -9,13 +9,13 @@
                     if ($this->Session->read('Auth.User')) {
                         echo $this->element('admin-menu');
                         echo $this->Html->link('log out',
-                            array('type'=>'button', 'class'=>'btn-link', 'float'=>'right', 'controller'=>'Users', 'action'=>'logout'),
-                            array('style'=>'color:grey;float:right'));
+                            array('controller'=>'Users', 'action'=>'logout'),
+                            array('style'=>'color:grey;float:right', 'type'=>'button', 'class'=>'btn-link', 'float'=>'right', 'id'=>'logout'));
                     }else {
                         echo $this->element('general-menu');
                         echo $this->Html->link('log in',
-                            array('type'=>'button', 'class'=>'btn-link', 'float'=>'right', 'controller'=>'Users', 'action'=>'login'),
-                            array('style'=>'color:grey;float:right'));
+                            array('controller'=>'Users', 'action'=>'login'),
+                            array('style'=>'color:grey;float:right', 'id'=>'login', 'type'=>'button', 'class'=>'btn-link'));
                     };
                     ?>
         </div><!-- /.navbar-collapse -->

@@ -75,7 +75,7 @@ class ViewingsController extends AppController {
 		if (!$this->Viewing->exists($id)) {
 			throw new NotFoundException(__('Invalid viewing'));
 		}
-		if ($this->request->is(array('post', 'put'))) {
+		if ($this->request->is(array('post', 'put')) && $this->request->data['Viewing'] != null) {
             $this->Viewing->read(null, $id);
             $this->Viewing->set(array(
                 'date' =>  $this->request->data['Viewing']['date'],

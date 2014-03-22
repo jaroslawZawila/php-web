@@ -8,16 +8,16 @@
             <fieldset>
             <div class="input-group">
                 <span class="input-group-addon">Username:</span>
-                <?php echo $this->Form->input('username', array('class' => 'form-control', 'placeholder' => 'Your name')); ?>
+                <?php echo $this->Form->input('username', array('class' => 'form-control', 'placeholder' => 'Your username', 'id'=>'username')); ?>
             </div>
             <br/>
             <div class="input-group">
                 <span class="input-group-addon">Password:</span>
-                <?php echo $this->Form->input('password', array('class' => 'form-control', 'placeholder' => 'Your email')); ?>
+                <?php echo $this->Form->input('password', array('class' => 'form-control', 'placeholder' => 'Your password', 'id'=>'password')); ?>
             </div>
             </fieldset>
             <br/>
-             <?php echo $this->Form->submit('Login', array('class'=>'btn btn-primary'));
+             <?php echo $this->Form->submit('Login', array('class'=>'btn btn-primary', 'id'=>'login-button'));
                    echo $this->Form->end(); ?>
         </div>
     </div>

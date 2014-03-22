@@ -22,6 +22,10 @@ class CustomersControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndex() {
+        $result = $this->testAction(
+            '/about', array('return' => 'result'));
+        debug($result);
+
 	}
 
 /**

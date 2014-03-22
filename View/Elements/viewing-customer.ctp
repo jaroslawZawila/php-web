@@ -49,7 +49,7 @@
 
         <td><?php echo $viewing['Properties']['houseno'] . ', ' . $viewing['Properties']['street'] . ', ' . $viewing['Properties']['city'] . ', ' . $viewing['Properties']['postcode'] ?></td>
         <td><b><?php echo $viewing['Viewing']['status'] ?></b></td>
-        <td><?php echo $this->Form->postLink('Manage', array('controller' => 'viewings','action' => 'view', $viewing['Viewing']['id'])); ?></td>
+        <td><?php echo $this->Html->link('Manage', array('controller' => 'viewings','action' => 'edit', $viewing['Viewing']['id'])); ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
