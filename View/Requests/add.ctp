@@ -32,33 +32,33 @@
                         <fieldset>
                             <div class="input-group">
                                 <span class="input-group-addon">Name</span>
-                                <?php echo $this->Form->input('name', array('class' => 'form-control', 'placeholder' => 'Your name')); ?>
+                                <?php echo $this->Form->input('name', array('class' => 'form-control', 'placeholder' => 'Your name', 'id'=>'contact-name')); ?>
                             </div>
                             <br/>
                             <div class="input-group">
                                 <span class="input-group-addon">Email</span>
-                                <?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Your email')); ?>
+                                <?php echo $this->Form->input('email', array('class' => 'form-control', 'placeholder' => 'Your email', 'id'=>'contact-email')); ?>
                             </div>
                             <br/>
                             <div class="input-group">
                                 <span class="input-group-addon">Phone</span>
-                                <?php echo $this->Form->input('phone', array('class' => 'form-control', 'placeholder' => 'Your phone number')); ?>
+                                <?php echo $this->Form->input('phone', array('class' => 'form-control', 'placeholder' => 'Your phone number', 'id'=>'contact-phone')); ?>
                             </div>
                             <br/>
                             <div class="input-group">
                                 <span class="input-group-addon">I am a</span>
                                 <?php echo $this->Form->input('type', array('class' => 'form-control',
-                                        'options' => array('Landlord' => 'Landlord', 'Tenant' => 'Tenant', 'Seller' => 'Seller', 'Buyer' => 'Buyer'))); ?>
+                                        'options' => array('Landlord' => 'Landlord', 'Tenant' => 'Tenant', 'Seller' => 'Seller', 'Buyer' => 'Buyer'), 'id'=>'contact-type')); ?>
                             </div>
                             <br/>
                             <div class="input-group">
                                 <span class="input-group-addon">Message</span>
-                                <?php echo $this->Form->input('message', array('type' => 'textarea', 'class' => 'form-control', 'placeholder' => 'message')); ?>
+                                <?php echo $this->Form->input('message', array('type' => 'textarea', 'class' => 'form-control', 'placeholder' => 'message', 'id'=>'contact-msg')); ?>
                             </div>
                             <br/>
                         </fieldset>
                         <?php
-                        echo $this->Form->submit('Send', array('class'=>'btn btn-primary'));
+                        echo $this->Form->submit('Send', array('class'=>'btn btn-primary', 'id'=>'contact-submit'));
                         echo $this->Form->end(); ?>
                     </div>
                 </div>

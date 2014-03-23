@@ -11,7 +11,7 @@ class RequestsController extends AppController {
 
     public $uses = array('Requestdetail', 'Request');
     public function beforeFilter() {
-        $this->Auth->allow('add'); // We can remove this line after we're finished
+        $this->Auth->allow('add');
     }
 
 /**
@@ -21,14 +21,27 @@ class RequestsController extends AppController {
  */
 	public $components = array('Paginator');
 
+    public $paginate = array(
+        'limit' => 10,
+        'fields' => array('id','name', 'type', 'status', 'date'),
+        'order' => array(
+            'Requests.date' => 'desc'
+        )
+    );
+
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
+        try {
+            $this->Paginator->settings = $this->paginate;
+            $this->set('requests', $this->Paginator->paginate('Requests'));
+        } catch (NotFoundException $e) {
+            $this->redirect( array('action'=>'index'));
+        }
 
-		$this->set('requests', $this->Request->getRequests());
 	}
 
 /**

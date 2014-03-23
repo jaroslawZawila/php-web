@@ -33,13 +33,29 @@ class RequestFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'name' => 'Lorem ipsum dolor sit amet',
-			'email' => 'Lorem ipsum dolor sit amet',
-			'phone' => 'Lorem ipsum dolor sit amet',
-			'type' => 'Lorem ipsum dolor sit amet',
-			'message' => 'Lorem ipsum dolor sit amet',
-			'date' => 1394122669
-		),
+			'name' => 'test name1',
+			'email' => 'test@email.com',
+			'phone' => '1234567890',
+			'type' => 'Seller',
+			'message' => 'test message',
+			'date' => '2014-03-08 17:31:15'
+		),array(
+            'id' => 2,
+            'name' => 'test name2',
+            'email' => 'test@email.com',
+            'phone' => '1234567890',
+            'type' => 'Landlord',
+            'message' => 'test message',
+            'date' => '2014-03-08 17:31:20'
+        ),array(
+            'id' => 3,
+            'name' => 'test name3',
+            'email' => 'test@email.com',
+            'phone' => '1234567890',
+            'type' => 'Buyer',
+            'message' => 'test message',
+            'date' => '2014-03-08 17:31:17'
+        ),
 	);
 
 }

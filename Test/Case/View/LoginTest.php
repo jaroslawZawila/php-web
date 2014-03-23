@@ -36,6 +36,18 @@ class LoginTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->assertEquals(true, $this->byId('logout')->displayed());
     }
 
+    public function testLogOutWorksFine()
+    {
+        $this->url('http://127.0.1.1/');
+        $this->byId("login")->click();
+        $this->byId("username")->value('admin');
+        $this->byId("password")->value('admin');
+        $this->byId("login-button")->click();
+        $this->byId("logout")->click();
+
+        $this->assertEquals(true, $this->byId('login')->displayed());
+    }
+
     public function testIfLoginFailedMessageIsDisplayed()
     {
         $this->url('http://127.0.1.1/');
