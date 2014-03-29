@@ -15,18 +15,26 @@ class ViewingsController extends AppController {
  */
 	public $components = array('Paginator');
 
-        public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow(); // We can remove this line after we're finished
-    }
+//        public function beforeFilter() {
+//        parent::beforeFilter();
+////            $this->Auth->allow(); // We can remove this line after we're finished
+//        }
+
+    public $paginate = array(
+        'limit' => 10
+    );
 /**
  * index method
  *
  * @return void
  */
 	public function index() {
-		$this->Viewing->recursive = 0;
-		$this->set('viewings', $this->Viewing->get_viewings_all());
+        try {
+            $this->Paginator->settings = $this->paginate;
+            $this->set('viewings', $this->Paginator->paginate('Viewing'));
+        } catch (NotFoundException $e) {
+            $this->redirect( array('action'=>'index'));
+        }
 	}
 
 /**
@@ -42,7 +50,6 @@ class ViewingsController extends AppController {
 		}
 		$options = array('conditions' => array('Viewing.' . $this->Viewing->primaryKey => $id));
 		$this->set('viewing', $this->Viewing->find('first', $options));
-
 	}
 
 /**
@@ -73,7 +80,7 @@ class ViewingsController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Viewing->exists($id)) {
-			throw new NotFoundException(__('Invalid viewing'));
+			throw new NotFoundException(__('Cannot find item.'));
 		}
 		if ($this->request->is(array('post', 'put')) && $this->request->data['Viewing'] != null) {
             $this->Viewing->read(null, $id);
@@ -86,7 +93,7 @@ class ViewingsController extends AppController {
 				$this->Session->setFlash(__('The viewing has been updated.'));
 				return $this->redirect(array('action' => 'edit', $id));
 			} else {
-				$this->Session->setFlash(__('The viewing could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The viewing could not be edited. Please, try again.'));
 			}
 		} else {
 			$options = array('conditions' => array('Viewing.' . $this->Viewing->primaryKey => $id));
@@ -105,16 +112,17 @@ class ViewingsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
-		$this->Viewing->id = $id;
-		if (!$this->Viewing->exists()) {
-			throw new NotFoundException(__('Invalid viewing'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Viewing->delete()) {
-			$this->Session->setFlash(__('The viewing has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The viewing could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+//	public function delete($id = null) {
+//		$this->Viewing->id = $id;
+//		if (!$this->Viewing->exists()) {
+//			throw new NotFoundException(__('Invalid viewing'));
+//		}
+//		$this->request->onlyAllow('post', 'delete');
+//		if ($this->Viewing->delete()) {
+//			$this->Session->setFlash(__('The viewing has been deleted.'));
+//		} else {
+//			$this->Session->setFlash(__('The viewing could not be deleted. Please, try again.'));
+//		}
+//		return $this->redirect(array('action' => 'index'));
+//	}
+}

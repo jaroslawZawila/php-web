@@ -6,7 +6,7 @@
  * Time: 20:39
  */
 
-class Test extends PHPUnit_Extensions_Selenium2TestCase
+class Test extends ControllerTestCase //PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()
     {
