@@ -9,10 +9,12 @@ App::uses('AppController', 'Controller');
 class PropertiesController extends AppController {
 
     public $uses = array('Property', 'Photo');
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow(); // We can remove this line after we're finished
     }
+
 /**
  * Components
  *
@@ -20,6 +22,9 @@ class PropertiesController extends AppController {
  */
 	public $components = array('Paginator');
 
+    public $paginate = array(
+        'limit' => 10
+    );
 /**
  * index method
  *
@@ -108,8 +113,8 @@ class PropertiesController extends AppController {
         if (!empty ($this->params->query['action'])){
             if($this->params->query['action'] == 'Let') {
                 $type = 'tolet';
-            }else if($this->params->query['action'] == 'Let') {
-                $type = 'forrent';
+            }else if($this->params->query['action'] == 'Sale') {
+                $type = 'forsale';
             }
         }
         if($type == 'tolet') {
@@ -120,12 +125,16 @@ class PropertiesController extends AppController {
         if(!empty($this->params->query)){
             $this->params->data = array('Search' => $this->params->query);
         }
-
 	}
 
     public function lists() {
-        $this->Property->recursive = 0;
-        $this->set('properties', $this->Paginator->paginate());
+        try
+        {
+            $this->Paginator->settings = $this->paginate;
+            $this->set('properties', $this->Paginator->paginate('Property'));
+        } catch (NotFoundException $e) {
+            $this->redirect( array('action'=>'lists'));
+        }
     }
 
 
@@ -138,7 +147,7 @@ class PropertiesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Property->exists($id)) {
-			throw new NotFoundException(__('Invalid property'));
+			throw new NotFoundException(__('Property cannot be found.'));
 		}
         $property = $this->Property->view_properties($id);
 		$this->set('property', $property);
@@ -167,7 +176,9 @@ class PropertiesController extends AppController {
 			} else {
 				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
 			}
-		}
+		}else {
+            $this->Session->setFlash(__('Cannot add property.'));
+        }
 	}
 
 /**
@@ -179,33 +190,28 @@ class PropertiesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Property->exists($id)) {
-			throw new NotFoundException(__('Invalid property'));
+			throw new NotFoundException(__('Property not found.'));
 		}
         $this->Property->id = $id;
-        if($this->request->data['Property']['addtype'] == 'sale') {
-            $this->request->data['Property']['status'] = 'for sale';
-        }elseif ($this->request->data['Property']['addtype'] == 'let') {
-            $this->request->data['Property']['status'] = 'to let';
-        };
 		if ($this->request->is(array('post', 'put'))) {
+            if($this->request->data['Property']['addtype'] == 'sale') {
+                $this->request->data['Property']['status'] = 'for sale';
+            }elseif ($this->request->data['Property']['addtype'] == 'let') {
+                $this->request->data['Property']['status'] = 'to let';
+            };
 			if ($this->Property->save($this->request->data)) {
 				$this->Session->setFlash(__('The property has been saved.'));
 			} else {
 				$this->Session->setFlash(__('The property could not be saved. Please, try again.'));
 			}
-		} else {
-			$options = array('conditions' => array('Property.' . $this->Property->primaryKey => $id));
-			$this->request->data = $this->Property->find('first', $options);
 		}
         return $this->redirect(array('action' => 'manage', $id));
-//		$customers = $this->Property->Customer->find('list');
-//		$this->set(compact('customers'));
 	}
 
 
     public function manage($id = null, $cid = null) {
         if (!$this->Property->exists($id)) {
-            throw new NotFoundException(__('Invalid property'));
+            throw new NotFoundException(__('Property not found.'));
         }
         $property = $this->Property->view_properties($id);
 
@@ -235,23 +241,5 @@ class PropertiesController extends AppController {
         }
             return $this->redirect(array('action' => 'manage', $this->request->data['Property']['id']));
     }
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Property->id = $id;
-		if (!$this->Property->exists()) {
-			throw new NotFoundException(__('Invalid property'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Property->delete()) {
-			$this->Session->setFlash(__('The property has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The property could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+
+}
