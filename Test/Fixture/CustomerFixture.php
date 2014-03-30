@@ -33,14 +33,123 @@ class CustomerFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'type' => 'Lorem ipsum dolor sit amet',
-			'firstname' => 'Lorem ipsum dolor sit amet',
-			'surname' => 'Lorem ipsum dolor sit amet',
-			'postcode' => 'Lorem ipsum dolor sit amet',
-			'houseno' => 'Lorem ipsum dolor sit amet',
-			'street' => 'Lorem ipsum dolor sit amet',
-			'city' => 'Lorem ipsum dolor sit amet'
+			'type' => 'Buyer',
+			'firstname' => 'Name',
+			'surname' => 'Surname',
+			'postcode' => 'BS4 7TP',
+			'houseno' => '15',
+			'street' => 'Street',
+			'city' => 'City'
 		),
+        array(
+            'id' => 2,
+            'type' => 'Tenant',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 3,
+            'type' => 'Seller',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 4,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 5,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 6,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 7,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 8,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 9,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),array(
+            'id' => 10,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 11,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
+        array(
+            'id' => 12,
+            'type' => 'Buyer',
+            'firstname' => 'Name',
+            'surname' => 'Surname',
+            'postcode' => 'BS4 7TP',
+            'houseno' => '15',
+            'street' => 'Street',
+            'city' => 'City'
+        ),
 	);
 
 }
