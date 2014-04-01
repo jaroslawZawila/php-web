@@ -24,10 +24,10 @@
         </div>
     </fieldset>
     <div class="span3">
-       <?php echo $this->Form->submit('Rent', array('class'=>'btn btn-primary', 'name'=>'action')); ?>
+       <?php echo $this->Form->submit('Sell', array('class'=>'btn btn-primary', 'name'=>'action' , 'id'=> 'quick-sell')); ?>
     </div>
     <div class="span3">
-        <?php echo $this->Form->submit('Let', array('class'=>'btn btn-primary', 'name'=>'action'));
+        <?php echo $this->Form->submit('Let', array('class'=>'btn btn-primary', 'name'=>'action', 'id' => 'quick-let'));
                 echo $this->Form->end();?>
     </div>
 
