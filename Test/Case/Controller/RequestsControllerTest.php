@@ -5,6 +5,8 @@ App::uses('RequestsController', 'Controller');
  * RequestsController Test Case
  *
  */
+
+
 class RequestsControllerTest extends ControllerTestCase {
 
 /**
@@ -14,8 +16,11 @@ class RequestsControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.request',
-        'app.requestPlus'
+        'app.requestPlus',
+        'app.requestdetail',
+        'app.requestdetailempty'
         );
+
     public $autoFixtures = false;
 
     function mockAuth($controller) {
@@ -184,6 +189,11 @@ class RequestsControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testView() {
+        $this->mockAuth($this);
+        $this->loadFixtures('Request', 'Requestdetailempty');
+
+        $results = $this->testAction('requests/view/1', array( 'return' => 'view'));
+        debug($results);
 	}
 
 /**

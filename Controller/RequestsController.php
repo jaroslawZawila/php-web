@@ -41,7 +41,6 @@ class RequestsController extends AppController {
         } catch (NotFoundException $e) {
             $this->redirect( array('action'=>'index'));
         }
-
 	}
 
 /**
