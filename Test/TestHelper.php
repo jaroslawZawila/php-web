@@ -25,33 +25,52 @@ class TestHelper {
         }
     }
 
-    public function initData($filename){
-        $file = new File("/var/www/cakephp/app/Test/Sql/" . $filename);
+    public function init() {
+        $file = new File("/var/www/cakephp/app/Test/Sql/init.sql");
         $content = $file->read();
 
         if ( !mysqli_multi_query($this->conn, $content))
         {
             die('Error: ' . mysqli_error($this->conn));
         }
+        mysqli_close($this->conn);
+
     }
 
-    public function cleanData($table) {
+    public function initData($filename){
+        $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db);
 
-        $content = 'truncate ' . $table;
+        if (mysqli_connect_errno())
+        {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
 
-        if ( !mysqli_query($this->conn, $content))
+        $file = new File("/var/www/cakephp/app/Test/Sql/" . $filename);
+        $content = $file->read();
+
+//        mysqli_next_result($this->conn);
+
+        if ( !mysqli_multi_query($this->conn, $content))
         {
             die('Error: ' . mysqli_error($this->conn));
         }
+        mysqli_close($this->conn);
     }
 
     public function dropSchema() {
+        $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->db);
 
-        $content = 'drop schema `caketest3`';
+        if (mysqli_connect_errno())
+        {
+            echo "Failed to connect to MySQL: " . mysqli_connect_error();
+        }
+
+        $content = 'drop database caketest3';
 
         if ( !mysqli_query($this->conn, $content))
         {
             die('Error: ' . mysqli_error($this->conn));
         }
+        mysqli_close($this->conn);
     }
 } 

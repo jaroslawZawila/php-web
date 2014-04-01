@@ -8,17 +8,40 @@
 
 App::uses('TestHelper', 'Test');
 
+class QuickSearchSuite extends PHPUnit_Framework_TestSuite
+{
+    private $conn;
+
+    public static function suite()
+    {
+        return new QuickSearchSuite('QuickSearchTest');
+    }
+
+    protected function setUp()
+    {
+        $this->conn = new TestHelper();
+
+        $this->conn->init();
+
+        $this->conn->initData("quick-search.sql");
+    }
+
+    protected function tearDown()
+    {
+        $this->conn->dropSchema();
+    }
+}
+
 class QuickSearchTest extends PHPUnit_Extensions_Selenium2TestCase
 {
 
-    private $conn;
+
 
     protected function setUp()
     {
         $this->setBrowser('firefox');
         $this->setBrowserUrl('http://127.0.1.1/');
-        $this->conn = new TestHelper();
-        $this->conn->initData("quick-search.sql");
+
     }
 
     protected function tearDown() {
