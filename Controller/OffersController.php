@@ -14,6 +14,7 @@ class OffersController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+    var $uses = array('Property', 'Customer', 'Offer');
 
 /**
  * index method
@@ -52,40 +53,15 @@ class OffersController extends AppController {
 				$this->Session->setFlash(__('The offer has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The offer could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('There was some problem. Please try again.'));
 			}
 		}
-		$properties = $this->Offer->Property->find('list');
-		$customers = $this->Offer->Customer->find('list');
-		$this->set(compact('properties', 'customers'));
+
+        $this->set('properties', $this->Property->find('list', array('fields' => array('list_properties'))));
+        $this->set('customers', $this->Customer->find('list', array('fields' => array('list_properties'))));
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		if (!$this->Offer->exists($id)) {
-			throw new NotFoundException(__('Invalid offer'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Offer->save($this->request->data)) {
-				$this->Session->setFlash(__('The offer has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The offer could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Offer.' . $this->Offer->primaryKey => $id));
-			$this->request->data = $this->Offer->find('first', $options);
-		}
-		$properties = $this->Offer->Property->find('list');
-		$customers = $this->Offer->Customer->find('list');
-		$this->set(compact('properties', 'customers'));
-	}
+
 
 /**
  * delete method

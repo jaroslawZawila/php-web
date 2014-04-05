@@ -6,6 +6,7 @@ App::uses('AppModel', 'Model');
  */
 class Customer extends AppModel {
 
+    public $virtualFields = array('list_properties' => 'concat(Customer.firstname, ", ", Customer.surname, ", ", Customer.postcode, ", ", Customer.phone)');
 /**
  * Validation rules
  *
