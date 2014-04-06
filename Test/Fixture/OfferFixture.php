@@ -36,8 +36,8 @@ class OfferFixture extends CakeTestFixture {
 			'properties_id' => 1,
 			'customers_id' => 1,
 			'price' => 1,
-			'status' => 'Lorem ipsum dolor sit amet',
-			'comment' => 'Lorem ipsum dolor sit amet'
+			'status' => 'NEW',
+			'comment' => 'Comment'
 		),
 	);
 

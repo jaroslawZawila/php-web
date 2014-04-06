@@ -13,9 +13,18 @@ class OffersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
-    var $uses = array('Property', 'Customer', 'Offer');
 
+        public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow(); // We can remove this line after we're finished
+    }
+
+	public $components = array('Paginator');
+    var $uses = array('Offer', 'Property', 'Customer');
+
+    public $paginate = array(
+        'limit' => 10
+    );
 /**
  * index method
  *
@@ -35,12 +44,48 @@ class OffersController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Offer->exists($id)) {
-			throw new NotFoundException(__('Invalid offer'));
+			throw new NotFoundException(__('Offer cannot be found.'));
 		}
 		$options = array('conditions' => array('Offer.' . $this->Offer->primaryKey => $id));
-		$this->set('offer', $this->Offer->find('first', $options));
+		$offer =  $this->Offer->find('first', $options);
+        $this->set('offer', $offer);
+        $this->set('comment', $offer['Offer']['comment']);
 	}
 
+    public function update($method ,$id = null) {
+        if (!$this->Offer->exists($id)) {
+            throw new NotFoundException(__('Offer cannot be found.'));
+        }
+
+        $this->Offer->read(null, $id);
+        $this->Offer->set('status', $method);
+        if($this->Offer->save()){
+            $this->Session->setFlash(__('The offer has been updated.'));
+        }else {
+            $this->Session->setFlash(__('There was some problem. Please try again.'));
+        };
+        return $this->redirect(array('action' => 'view', $id));
+    }
+
+    public function editComment() {
+        if ($this->request->is('post')) {
+            $id = $this->request->data['Offers']['id'];
+
+            if ($this->Offer->exists($id)) {
+                $this->Offer->read(null, $id);
+                $this->Offer->set('comment', $this->request->data['Offers']['comment']);
+                if ($this->Offer->save($this->request->data)) {
+                    $this->Session->setFlash(__('The comment has been updated.'));
+                } else {
+                    $this->Session->setFlash(__('There was some problem. Please try again.'));
+                }
+                return $this->redirect(array('action' => 'view', $this->request->data['Offers']['id']));
+            }
+            $this->Session->setFlash(__('Cannot find offer.'));
+            return $this->redirect(array('action' => 'index'));
+        }
+        return $this->redirect(array('action' => 'index'));
+    }
 /**
  * add method
  *
@@ -60,26 +105,4 @@ class OffersController extends AppController {
         $this->set('properties', $this->Property->find('list', array('fields' => array('list_properties'))));
         $this->set('customers', $this->Customer->find('list', array('fields' => array('list_properties'))));
 	}
-
-
-
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Offer->id = $id;
-		if (!$this->Offer->exists()) {
-			throw new NotFoundException(__('Invalid offer'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Offer->delete()) {
-			$this->Session->setFlash(__('The offer has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The offer could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+}

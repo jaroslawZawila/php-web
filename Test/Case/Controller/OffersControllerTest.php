@@ -23,7 +23,9 @@ class OffersControllerTest extends ControllerTestCase {
  *
  * @return void
  */
-	public function testIndex() {
+	public function testIndexReturnsOneOffer() {
+        $result = $this->testAction('/offers', array('return'=>'vars'));
+        $this->assertEqual(1, count($result));
 	}
 
 /**
@@ -31,9 +33,269 @@ class OffersControllerTest extends ControllerTestCase {
  *
  * @return void
  */
-	public function testView() {
+	public function testViewThrowExcetionIfOfferDoesNotExsit() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('exists')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(false));
+
+
+        $this->expectException('NotFoundException','Offer cannot be found.');
+        $this->testAction(
+            '/offers/view/1000',
+            array('method' => 'get')
+        );
 	}
 
+    public function testViewSetUpDetailsCorrectly() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Auth'
+            ),
+            'methods' => array('set'
+            )
+        ));
+
+        $Offers->expects($this->at(0))
+            ->method('set')
+            ->with('offer');
+
+        $Offers->expects($this->at(1))
+            ->method('set')
+            ->with('comment', 'Comment');
+
+        $this->testAction(
+            '/offers/view/1',
+            array('method' => 'get')
+        );
+    }
+
+    public function testUpdateThrowExcetionIfOfferDoesNotExsit() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('exists')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(false));
+
+
+        $this->expectException('NotFoundException','Offer cannot be found.');
+        $this->testAction(
+            '/offers/update/1000',
+            array('method' => 'get')
+        );
+    }
+
+    public function testUpdateRedirectToViewAndDisplayErrorMessageIfCannotUpdateOffer() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Session' => array('setFlash'),
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('save')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('save')
+            ->will($this->returnValue(false));
+        $Offers->Session
+            ->expects($this->once())
+            ->method('setFlash')
+            ->with("There was some problem. Please try again.");
+
+        $this->testAction(
+            '/offers/update/status/1',
+            array('method' => 'get')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers/view/1', $this->headers['Location']);
+    }
+
+    public function testUpdateRedirectToViewAndDisplaySuccessfulMessage() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Session' => array('setFlash'),
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('save')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('save')
+            ->will($this->returnValue(true));
+        $Offers->Session
+            ->expects($this->once())
+            ->method('setFlash')
+            ->with("The offer has been updated.");
+
+        $this->testAction(
+            '/offers/update/status/1',
+            array('method' => 'get')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers/view/1', $this->headers['Location']);
+    }
+
+    public function testEditCommentWithMethodDifferentThanPostRedirectToIndexView() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Auth'
+            )
+        ));
+
+        $this->testAction(
+            '/offers/editComment/1',
+            array('method' => 'get')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers', $this->headers['Location']);
+    }
+
+    public function testEditCommentRedirectToOffersIfOfferCannotBefound() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Session' => array('setFlash'),
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('exists')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(false));
+        $Offers->Session
+            ->expects($this->once())
+            ->method('setFlash')
+            ->with("Cannot find offer.");
+
+        $data = array(
+            'Offers' => array(
+                'id' => 1,
+                'comment' => 'comment'
+            )
+        );
+
+        $this->testAction(
+            '/offers/editComment/1',
+            array('data' => $data, 'method' => 'post')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers', $this->headers['Location']);
+    }
+
+
+
+    public function testEditCommentDisplayErrorMessageIfTheCommentCannotBeUpdated() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Session' => array('setFlash'),
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('exists', 'save')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(true));
+        $Offers->Session
+            ->expects($this->once())
+            ->method('setFlash')
+            ->with("There was some problem. Please try again.");
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('save')
+            ->will($this->returnValue(false));
+
+        $data = array(
+            'Offers' => array(
+                'id' => 1,
+                'comment' => 'comment'
+            )
+        );
+
+        $this->testAction(
+            '/offers/editComment/1',
+            array('data' => $data, 'method' => 'post')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers', $this->headers['Location']);
+    }
+
+    public function testEditCommentDisplayErrorMessageIfTheCommentUpdated() {
+
+        $Offers = $this->generate('Offers', array(
+            'components' => array(
+                'Session' => array('setFlash'),
+                'Auth'
+            ),
+            'models' => array(
+                'Offer' => array('exists', 'save')
+            )
+        ));
+
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(true));
+        $Offers->Session
+            ->expects($this->once())
+            ->method('setFlash')
+            ->with("The comment has been updated.");
+        $Offers->Offer
+            ->expects($this->once())
+            ->method('save')
+            ->will($this->returnValue(true));
+
+        $data = array(
+            'Offers' => array(
+                'id' => 1,
+                'comment' => 'comment'
+            )
+        );
+
+        $this->testAction(
+            '/offers/editComment/1',
+            array('data' => $data, 'method' => 'post')
+        );
+
+        $this->assertContains('http://127.0.1.1/offers', $this->headers['Location']);
+    }
 /**
  * testAdd method
  *
@@ -137,20 +399,5 @@ class OffersControllerTest extends ControllerTestCase {
         $this->assertContains('http://127.0.1.1/offers', $this->headers['Location']);
 
     }
-/**
- * testEdit method
- *
- * @return void
- */
-	public function testEdit() {
-	}
-
-/**
- * testDelete method
- *
- * @return void
- */
-	public function testDelete() {
-	}
 
 }
