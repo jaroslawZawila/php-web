@@ -36,11 +36,101 @@ class ViewingFixture extends CakeTestFixture {
 			'id' => 1,
 			'properties_id' => 1,
 			'customers_id' => 1,
-			'status' => 'Lorem ipsum dolor sit amet',
-			'date' => 'Lorem ipsum dolor sit amet',
-			'timestamp' => 'Lorem ipsum dolor sit amet',
-			'comment' => 'Lorem ipsum dolor sit amet'
+			'status' => 'NEW',
+			'date' => '12/12/2014 12:20',
+			'timestamp' => 'timestamp',
+			'comment' => 'Comment'
 		),
+        array(
+            'id' => 2,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 3,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 4,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 5,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 6,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 7,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 8,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 9,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+        array(
+            'id' => 10,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),array(
+            'id' => 11,
+            'properties_id' => 1,
+            'customers_id' => 1,
+            'status' => 'NEW',
+            'date' => '12/12/2014 12:20',
+            'timestamp' => 'timestamp',
+            'comment' => 'Comment'
+        ),
+
 	);
 
 }

@@ -8,6 +8,8 @@
 
 class RequestdetailemptyFixture extends CakeTestFixture {
 
+    public $name = "Requestdetails";
+    public $table = 'requestdetails';
     /**
      * Fields
      *

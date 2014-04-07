@@ -8,6 +8,24 @@
 
 App::uses('TestHelper', 'Test');
 
+class RequestFormSuite extends PHPUnit_Framework_TestSuite
+{
+    public static function suite()
+    {
+        return new MySuite('RequestFormTest');
+    }
+
+    protected function setUp()
+    {
+        print "\nMySuite::setUp()";
+    }
+
+    protected function tearDown()
+    {
+        print "\nMySuite::tearDown()";
+    }
+}
+
 class RequestFormTest extends PHPUnit_Extensions_Selenium2TestCase
 {
 

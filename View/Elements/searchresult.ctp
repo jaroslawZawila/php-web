@@ -7,7 +7,7 @@
                         }else {
                             $url = 'noimage.jpg';
                         };
-                        echo $this->Html->image($url, array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px',
+                        echo $this->Html->image($url, array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px', 'id'=>'rimg-' . $property['Property']['id'],
                         'url' =>  array('action' => 'view', $property['Property']['id'])));
                         ?>
             </div>
@@ -16,7 +16,7 @@
                 <b style="color:red; float: right"><?php echo '£ ' . ($property['Property']['price'])?></b>
                 <div><br/>
                     <?php echo substr(($property['Property']['description']),0, 150 )?>
-                    <?php echo $this->Html->link('more...', array('action' => 'view', $property['Property']['id'])); ?>
+                    <?php echo $this->Html->link('more...', array('action' => 'view', $property['Property']['id']), array( 'id'=>'rlink-' . $property['Property']['id']) ); ?>
                 </div>
                 <div><br/>
                     <b><?php echo ($property['Property']['status']) ?></b>

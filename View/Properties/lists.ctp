@@ -4,6 +4,12 @@
     </div>
     <div class="panel-body">
         <table class="table table-responsive">
+                <th><?php echo $this->Paginator->sort('id'); ?></th>
+                <th><?php echo $this->Paginator->sort('houseno'); ?></th>
+                <th><?php echo $this->Paginator->sort('street'); ?></th>
+                <th><?php echo $this->Paginator->sort('city'); ?></th>
+                <th><?php echo $this->Paginator->sort('postcode'); ?></th>
+                <th></th>
             <?php foreach ($properties as $property): ?>
             <tr>
                 <td><?php echo h($property['Property']['id']); ?>&nbsp;</td>
@@ -16,5 +22,6 @@
             </tr>
             <?php endforeach; ?>
         </table>
+           <?php echo $this->element('paging', array('paging'=>$this->request->params['paging']['Property'])) ?>
     </div>
 </div>

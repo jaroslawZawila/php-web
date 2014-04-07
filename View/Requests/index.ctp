@@ -23,7 +23,7 @@
                 </tr>
             <?php endforeach; ?>
         </table>
-        <?php echo $this->element('paging') ?>
+        <?php echo $this->element('paging', array('paging'=>$this->request->params['paging']['Requests'])) ?>
 </div>
 
 
