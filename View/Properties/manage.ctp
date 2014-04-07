@@ -7,7 +7,7 @@
                 <div>
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#basicdetails" data-toggle="tab">Basic details</a></li>
-                        <li><a href="#description" data-toggle="tab">Description</a></li>
+                        <li><a href="#description" data-toggle="tab" id="description-tab">Description</a></li>
                         <li><a href="#photos" data-toggle="tab">Photos</a></li>
                         <li><a href="#docs" data-toggle="tab">Documents</a></li>
                     </ul>
@@ -29,7 +29,7 @@
                                 <?php echo $this->Form->input('id', array('type'=>'hidden', 'value'=>$property['Property']['id'] )) ?>
                             </div>
                         </fieldset>
-                        <?php echo $this->Form->submit('Update', array('class'=>'btn btn-primary'));
+                        <?php echo $this->Form->submit('Update', array('class'=>'btn btn-primary', 'id'=>'update-description'));
                                 echo $this->Form->end(); ?>
                     </div>
                 </div>

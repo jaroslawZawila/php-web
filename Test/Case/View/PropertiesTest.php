@@ -105,4 +105,37 @@ class PropertiesTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->assertEquals("The property could not be saved. Please, try again.", $this->byId('flashMessage')->text());
     }
 
+    public function testDescriptionIsAddedToProperty()
+    {
+        $this->url('http://127.0.1.1/');
+
+        $this->byId("login")->click();
+        $this->byId("username")->value('admin');
+        $this->byId("password")->value('admin');
+        $this->byId("login-button")->click();
+
+        $this->byId("menu-customer")->click();
+        $this->byId("menu-customer-view")->click();
+        $this->byId("view-2")->click();
+        $this->byId("properties-tab")->click();
+        $this->byId("add-property")->click();
+
+
+        $this->byId("price")->value('130000');
+        $this->byId("yob")->value('2010');
+        $this->byId("houseno")->value('1');
+        $this->byId("street")->value('Street');
+        $this->byId("city")->value('City');
+        $this->byId("postcode")->value('xx1 2xx');
+
+        $this->byId("register")->click();
+        $this->byId('description-tab')->click();
+
+        $this->assertEquals("", $this->byId('PropertyDescription')->value());
+
+        $this->byId('PropertyDescription')->value("test value");
+        $this->byId('update-description')->click();
+
+        $this->assertEquals("test value", $this->byId('PropertyDescription')->value());
+    }
 } 
