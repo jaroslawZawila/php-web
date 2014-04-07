@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav">
     <li class="divider-vertical"><a href="/admin/home">Home</a></li>
     <li class="divider-vertical"><a href="/admin/request/view" id="request-link-menu">Requests</a></li>
-    <li class="divider-vertical"><a href="/admin/properties/view">Properties</a></li>
+    <li class="divider-vertical"><a href="/admin/properties/view" id="menu-properties">Properties</a></li>
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu-customer">Customers<b class="caret"></b></a>
         <ul class="dropdown-menu">

@@ -8,7 +8,7 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#basicdetails" data-toggle="tab">Basic details</a></li>
                         <li><a href="#description" data-toggle="tab" id="description-tab">Description</a></li>
-                        <li><a href="#photos" data-toggle="tab">Photos</a></li>
+                        <li><a href="#photos" data-toggle="tab" id="photo-tab">Photos</a></li>
                         <li><a href="#docs" data-toggle="tab">Documents</a></li>
                     </ul>
                 </div>

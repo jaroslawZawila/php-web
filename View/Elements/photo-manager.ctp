@@ -35,12 +35,12 @@
         add photo
     </button></td>
 </tr>
-<?php if ( count($photos) == 0) { echo '<div class="alert alert-warning">Sorry there are not pictures for this properties.</div>'; }; ?>
+<?php if ( count($photos) == 0) { echo '<div class="alert alert-warning" id="alert">Sorry there are not pictures for this properties.</div>'; }; ?>
 <?php foreach ($photos as $photo): ?>
 <tr>
     <td><?php echo $this->Html->image($photo['Photo']['url'], array('alt' => 'NO IMAGE', 'border' => '0','width'=>'150px', 'height'=>'110px'));?></td>
     <td><b>Description:</b><p><?php echo $photo['Photo']['description'] ?></p></td>
-    <td><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'photos','action' => 'delete', $photo['Photo']['id']), null, __('Are you sure you want to delete??')); ?></td>
+    <td><?php echo $this->Form->postLink(__('Delete'), array('controller' => 'photos','action' => 'delete', $photo['Photo']['id']), array('id'=>'delete-' . $photo['Photo']['id']), __('Are you sure you want to delete??')); ?></td>
 </tr>
 <?php endforeach; ?>
 </table>

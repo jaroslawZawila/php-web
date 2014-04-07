@@ -34,7 +34,7 @@ class TestHelper {
             die('Error: ' . mysqli_error($this->conn));
         }
         mysqli_close($this->conn);
-
+        sleep(1);
     }
 
     public function initData($filename){
@@ -55,6 +55,7 @@ class TestHelper {
         }
 //        mysqli_next_result($this->conn);
         mysqli_close($this->conn);
+        sleep(1);
     }
 
     public function dropSchema() {

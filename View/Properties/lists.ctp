@@ -18,7 +18,7 @@
                 <td><?php echo h($property['Property']['city']); ?>&nbsp;</td>
                 <td><?php echo h($property['Property']['postcode']); ?>&nbsp;</td>
                 <td><?php echo $this->Html->link('Manage property', array('controller' => 'properties', 'action' => 'manage', $property['Property']['id']),
-                        array('class' => 'btn btn-info')); ?> </td>
+                        array('class' => 'btn btn-info', 'id'=>'manage-' . $property['Property']['id'])); ?> </td>
             </tr>
             <?php endforeach; ?>
         </table>
