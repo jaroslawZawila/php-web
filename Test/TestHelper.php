@@ -48,12 +48,12 @@ class TestHelper {
         $file = new File("/var/www/cakephp/app/Test/Sql/" . $filename);
         $content = $file->read();
 
-//        mysqli_next_result($this->conn);
 
         if ( !mysqli_multi_query($this->conn, $content))
         {
             die('Error: ' . mysqli_error($this->conn));
         }
+//        mysqli_next_result($this->conn);
         mysqli_close($this->conn);
     }
 
@@ -65,7 +65,7 @@ class TestHelper {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
 
-        $content = 'drop database caketest3';
+        $content = 'drop database caketest';
 
         if ( !mysqli_query($this->conn, $content))
         {

@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `caketest3`;
-USE `caketest3`;
+CREATE DATABASE  IF NOT EXISTS `caketest`;
+USE `caketest`;
 
 DROP TABLE IF EXISTS `acos`;
 CREATE TABLE `acos` (
@@ -194,3 +194,6 @@ CREATE TABLE `viewings` (
   CONSTRAINT `fk_viewings_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_viewings_properties1` FOREIGN KEY (`properties_id`) REFERENCES `properties` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+INSERT INTO users VALUES (4,'admin','b682ff05a69e817a747c86fea8626124e6c6277a',4,'2014-03-06 19:29:28','2014-03-06 19:29:28');
+INSERT INTO groups VALUES (5,'admin', null, null);

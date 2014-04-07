@@ -1,4 +1,4 @@
-USE `caketest3`;
+USE `caketest`;
 
 INSERT INTO `customers` VALUES (1,'Seller','First','Surname','BS1 2PH','15','Street','Town','email@host.com','078710101010');
 
