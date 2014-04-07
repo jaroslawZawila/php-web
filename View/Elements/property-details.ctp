@@ -144,7 +144,7 @@
     </tr>
     <tr>
         <td colspan="4">
-            <button class="btn btn-default" data-toggle="modal" data-target="#editModal">
+            <button class="btn btn-default" data-toggle="modal" data-target="#editModal" id="edit-property">
                 Edit
             </button>
         </td>

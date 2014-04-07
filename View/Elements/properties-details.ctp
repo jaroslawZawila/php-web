@@ -11,11 +11,11 @@
             <td><?php echo h($property['Property']['postcode']); ?>&nbsp;</td>
 
             <td><?php echo $this->Html->link('Manage property', array('controller' => 'properties', 'action' => 'manage', $property['Property']['id'], $customerid),
-                    array('class' => 'btn btn-info')); ?> </td>
+                    array('class' => 'btn btn-info', 'id'=>'manage-' . $property['Property']['id'])); ?> </td>
         </tr>
     <?php endforeach; ?>
 </table>
 <div>
     <?php echo $this->Html->link('Attach properties', array('controller' => 'properties', 'action' => 'add', $customerid),
-        array('class' => 'btn btn-default')); ?>
+        array('class' => 'btn btn-default', 'id'=>'add-property')); ?>
 </div>

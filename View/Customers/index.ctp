@@ -12,7 +12,7 @@
                 <td><?php echo h($customer['Customer']['city']); ?>&nbsp;</td>
                 <td><?php echo h($customer['Customer']['postcode']); ?>&nbsp;</td>
                 <td class="btn btn-default btn-sm">
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $customer['Customer']['id'])); ?>
+                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $customer['Customer']['id']),array('id'=> 'view-' . $customer['Customer']['id'])); ?>
                 </td>
             </tr>
             <?php endforeach; ?>

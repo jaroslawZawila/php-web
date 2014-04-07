@@ -5,7 +5,7 @@
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="menu-customer">Customers<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            <li><a href="/admin/customer/view">View customers</a></li>
+            <li><a href="/admin/customer/view" id="menu-customer-view">View customers</a></li>
             <li><a href="/admin/customer/add" id="menu-customer-add">Add new customer</a></li>
         </ul>
     </li>
