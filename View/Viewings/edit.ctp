@@ -47,7 +47,7 @@
 	</fieldset>
     <div class="row-fluid">
         <div class="span2">
-            <?php echo $this->Form->submit('Update', array('class'=>'btn btn-primary'));?>
+            <?php echo $this->Form->submit('Update', array('class'=>'btn btn-primary', 'id'=>'update-viewings'));?>
             <?php echo $this->Form->end(); ?></div>
         <div ><?php echo $this->Html->link('Back to viewings', array('controller' => 'viewings', 'action' => 'index'), array('class'=>'btn btn-info')); ?></div>
     </div>

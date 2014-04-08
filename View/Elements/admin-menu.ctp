@@ -9,7 +9,7 @@
             <li><a href="/admin/customer/add" id="menu-customer-add">Add new customer</a></li>
         </ul>
     </li>
-    <li class="divider-vertical"><a href="/admin/viewings/view">Viewings</a></li>
+    <li class="divider-vertical"><a href="/admin/viewings/view" id="menu-viewings">Viewings</a></li>
     <li class="divider-vertical"><a href="/offers">Offers</a></li>
     <li class="divider-vertical"><a href="#">Staff</a></li>
 </ul>

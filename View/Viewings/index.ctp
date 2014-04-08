@@ -12,7 +12,7 @@
                 <td><?php echo h($viewing['Viewing']['status']); ?>&nbsp;</td>
                 <td><?php echo h($viewing['Viewing']['date']); ?>&nbsp;</td>
                 <td class="actions">
-                    <?php echo $this->Html->link(__('Manage'), array('action' => 'edit', $viewing['Viewing']['id'])); ?>
+                    <?php echo $this->Html->link(__('Manage'), array('action' => 'edit', $viewing['Viewing']['id']), array('id'=>'manage-' . $viewing['Viewing']['id'])); ?>
                 </td>
             </tr>
             <?php endforeach; ?>
