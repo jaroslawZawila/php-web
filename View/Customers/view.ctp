@@ -8,7 +8,7 @@
             <div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#basicdetails" data-toggle="tab">Basic details</a></li>
-                    <li><a href="#viewing" data-toggle="tab">Viewing</a></li>
+                    <li><a href="#viewing" data-toggle="tab" id="viewings-tab">Viewing</a></li>
                     <li><a href="#docs" data-toggle="tab">Documents</a></li>
                     <li class=<?php echo $visible ?> ><a href="#properties" data-toggle="tab" id="properties-tab">Properties</a></li>
                 </ul>

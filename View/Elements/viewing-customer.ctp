@@ -32,7 +32,7 @@
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <?php echo $this->Form->submit('Upadate', array('class'=>'btn btn-primary'));?>
+                <?php echo $this->Form->submit('Upadate', array('class'=>'btn btn-primary', 'id'=>'submit-viewing'));?>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -49,13 +49,13 @@
 
         <td><?php echo $viewing['Properties']['houseno'] . ', ' . $viewing['Properties']['street'] . ', ' . $viewing['Properties']['city'] . ', ' . $viewing['Properties']['postcode'] ?></td>
         <td><b><?php echo $viewing['Viewing']['status'] ?></b></td>
-        <td><?php echo $this->Html->link('Manage', array('controller' => 'viewings','action' => 'edit', $viewing['Viewing']['id'])); ?></td>
+        <td><?php echo $this->Html->link('Manage', array('controller' => 'viewings','action' => 'edit', $viewing['Viewing']['id']), array('id'=>'manage-' . $viewing['Viewing']['id'])); ?></td>
     </tr>
     <?php endforeach; ?>
 </table>
 </div>
 <div>
-    <button class="btn btn-default" data-toggle="modal" data-target="#viewingModal" name="add-viewings">
+    <button class="btn btn-default" data-toggle="modal" data-target="#viewingModal" name="add-viewings" id="add-viewings">
             <span class="glyphicon glyphicon-plus"></span>&nbsp;Add viewing request
     </button>
 
