@@ -83,4 +83,50 @@ class RequestFormTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->setExpectedException('PHPUnit_Extensions_Selenium2TestCase_WebDriverException');
         $this->byId("apply");
     }
+
+    public function testRequestIsInvalid()
+    {
+        $this->conn->initData("request.sql");
+        sleep(1);
+
+        $this->url('http://127.0.1.1/');
+        $this->byId("login")->click();
+        $this->byId("username")->value('admin');
+        $this->byId("password")->value('admin');
+        $this->byId("login-button")->click();
+
+        $this->byId("request-link-menu")->click();
+        $this->byId("view-button-0")->click();
+
+        $this->assertEquals("NEW", $this->byId('status')->value());
+        $this->select($this->byId("status"))->selectOptionByValue('INVALID');
+
+        $this->byId("apply")->click();
+
+        $this->assertEquals('Status changed to INVALID ', $this->byId('comment-1')->text());
+
+        $this->setExpectedException('PHPUnit_Extensions_Selenium2TestCase_WebDriverException');
+        $this->byId("apply");
+    }
+
+    public function testRequestAddedComment()
+    {
+        $this->conn->initData("request.sql");
+        sleep(1);
+
+        $this->url('http://127.0.1.1/');
+        $this->byId("login")->click();
+        $this->byId("username")->value('admin');
+        $this->byId("password")->value('admin');
+        $this->byId("login-button")->click();
+
+        $this->byId("request-link-menu")->click();
+        $this->byId("view-button-0")->click();
+
+        $this->byId("add-comment")->click();
+        sleep(1);
+        $this->byId("RequestdetailComment")->value("comment");
+        $this->byId("submit-comment")->click();
+        $this->assertEquals('comment ', $this->byId('comment-1')->text());
+    }
 }

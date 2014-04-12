@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <?php  echo $this->Form->submit('Submit comment', array('class'=>'btn btn-primary disabled', 'div' => false)); ?>
+                <?php  echo $this->Form->submit('Submit comment', array('class'=>'btn btn-primary', 'div' => false, 'id'=>'submit-comment')); ?>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -66,7 +66,7 @@
                                     echo $this->Form->end(); ?>
                         </td>
                         <td>
-                            <button class="btn btn-info" data-toggle="modal" data-target="#commentModal">
+                            <button class="btn btn-info" data-toggle="modal" data-target="#commentModal" id="add-comment">
                                 Add comment
                             </button>
                         </td>
