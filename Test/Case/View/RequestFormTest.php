@@ -12,17 +12,21 @@ class RequestFormSuite extends PHPUnit_Framework_TestSuite
 {
     public static function suite()
     {
-        return new MySuite('RequestFormTest');
+        return new RequestFormSuite('RequestFormTest');
     }
 
     protected function setUp()
     {
-        print "\nMySuite::setUp()";
+        $this->conn = new TestHelper();
+
+        $this->conn->init();
+
+        $this->conn->initData("init-log.sql");
     }
 
     protected function tearDown()
     {
-        print "\nMySuite::tearDown()";
+        $this->conn->dropSchema();
     }
 }
 
@@ -55,4 +59,28 @@ class RequestFormTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->assertEquals('alert alert-success', $this->byId('flashMessage')->attribute("class"));
     }
 
+    public function testRequestIsClosed()
+    {
+        $this->conn->initData("request.sql");
+        sleep(1);
+
+        $this->url('http://127.0.1.1/');
+        $this->byId("login")->click();
+        $this->byId("username")->value('admin');
+        $this->byId("password")->value('admin');
+        $this->byId("login-button")->click();
+
+        $this->byId("request-link-menu")->click();
+        $this->byId("view-button-0")->click();
+
+        $this->assertEquals("NEW", $this->byId('status')->value());
+        $this->select($this->byId("status"))->selectOptionByValue('CLOSED');
+
+        $this->byId("apply")->click();
+
+        $this->assertEquals('Status changed to CLOSED ', $this->byId('comment-1')->text());
+
+        $this->setExpectedException('PHPUnit_Extensions_Selenium2TestCase_WebDriverException');
+        $this->byId("apply");
+    }
 }

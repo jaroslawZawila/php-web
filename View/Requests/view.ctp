@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <?php  echo $this->Form->submit('Submit comment', array('class'=>'btn btn-primary', 'div' => false)); ?>
+                <?php  echo $this->Form->submit('Submit comment', array('class'=>'btn btn-primary disabled', 'div' => false)); ?>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>
@@ -47,6 +47,7 @@
                         <td><b>Message:</b></td>
                         <td colspan="3"><?php echo h($request['Request']['message']); ?></td>
                     </tr>
+                    <?php if($request['Request']['status'] == "NEW" || $request['Request']['status'] == "OPEN"): ?>
                     <tr>
                         <td><b>STATUS</b></td>
                         <td colspan="2">
@@ -54,10 +55,10 @@
                             <fieldset>
                             <div class="input-group" >
                                 <?php echo $this->Form->input('requests_id', array('type'=>'hidden', 'value'=>$request['Request']['id'] )) ?>
-                                <?php echo $this->Form->input('status', array('class' => 'form-control', 'value' => $request['Request']['status'],
+                                <?php echo $this->Form->input('status', array('class' => 'form-control', 'id'=>'status', 'value' => $request['Request']['status'],
                                         'options' => array('NEW' => 'New', 'OPEN' => 'Open', 'CLOSED' => 'Closed', 'INVALID' => 'Invalid'))); ?>
                                 <span class="input-group-addon">
-                                    <?php echo $this->Form->submit('Apply', array('div' => false)); ?>
+                                    <?php echo $this->Form->submit('Apply', array('div' => false, 'id'=>'apply', 'class'=>'disabled')); ?>
                                 </span>
                             </div>
                             </fieldset>
@@ -70,6 +71,7 @@
                             </button>
                         </td>
                     </tr>
+                    <?php endif; ?>
                     <tr>
                         <td><b>Comments:</b></td>
                         <td colspan="3"></td>
@@ -78,7 +80,7 @@
                     <tr>
                         <td><?php echo h($comment['Requestdetail']['date']); ?>&nbsp;</td>
                         <td colspan="3">
-                            <div class="well"> <?php echo h($comment['Requestdetail']['comment']); ?>&nbsp;</div>
+                            <div class="well" id="<?php echo 'comment-' . $comment['Requestdetail']['id']?>"> <?php echo h($comment['Requestdetail']['comment']); ?>&nbsp;</div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
