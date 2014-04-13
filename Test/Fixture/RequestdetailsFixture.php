@@ -3,7 +3,7 @@
  * RequestdetailFixture
  *
  */
-class RequestdetailFixture extends CakeTestFixture {
+class RequestdetailsFixture extends CakeTestFixture {
 
 /**
  * Fields
