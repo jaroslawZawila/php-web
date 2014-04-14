@@ -51,21 +51,6 @@ class ViewingsControllerTest extends ControllerTestCase {
 
         $this->assertContains('http://127.0.1.1/admin/viewings/view', $this->headers['Location']);
     }
-/**
- * testView method
- *
- * @return void
- */
-	public function testView() {
-         $this->testAction('/viewings/view/1', array( 'return' => 'vars'));
-//        debug($result);
-//        TODO: finish test
-	}
-
-    public function testThrowExceptionIfViewingCannotBeFound() {
-        $this->expectException('NotFoundException','Invalid viewing');
-        $this->testAction('/viewings/view/300');
-    }
 
 /**
  * testAdd method

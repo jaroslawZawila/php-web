@@ -224,6 +224,9 @@ class PropertiesControllerTest extends ControllerTestCase {
     public function testViewRetrivePhotosAndPropertyDetailsIfExsits() {
 
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Photo' => array("gets"),
                 'Property' => array("view_properties"))));
@@ -249,7 +252,8 @@ class PropertiesControllerTest extends ControllerTestCase {
     public function testAddPropertyUsingGetMethodDisplayMessage() {
         $Properties = $this->generate('Properties', array(
             'components' => array(
-                'Session' => array("setFlash"))));
+                'Session' => array("setFlash"),
+                'Auth')));
 
         $Properties->Session->expects($this->once())
             ->method('setFlash')
@@ -263,7 +267,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array("setFlash"))));
+                'Session' => array("setFlash"),
+                'Auth')));
 
         $Properties->Property->expects($this->once())
             ->method('save')
@@ -285,6 +290,9 @@ class PropertiesControllerTest extends ControllerTestCase {
 
     public function testAddSavePropertyForSale() {
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Property' => array("save", "getLastInsertId"))));
 
@@ -309,6 +317,9 @@ class PropertiesControllerTest extends ControllerTestCase {
 
     public function testAddSavePropertyToLet() {
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Property' => array("save", "getLastInsertId"))));
 
@@ -346,7 +357,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array('setFlash'))));
+                'Session' => array('setFlash'),
+                'Auth')));
 
         $Properties->Property->expects($this->once())
             ->method('save')
@@ -372,7 +384,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array('setFlash'))));
+                'Session' => array('setFlash'),
+                'Auth')));
 
         $Properties->Property->expects($this->once())
             ->method('save')
@@ -398,7 +411,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array('setFlash'))));
+                'Session' => array('setFlash'),
+                'Auth')));
 
         $Properties->Property->expects($this->once())
             ->method('save')
@@ -431,6 +445,9 @@ class PropertiesControllerTest extends ControllerTestCase {
 
     public function testManageDisplaysPropertyWithLinkToView(){
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Property' => array("view_properties"),
                 'Photo' => array('gets')),
@@ -471,6 +488,9 @@ class PropertiesControllerTest extends ControllerTestCase {
 
     public function testManageDisplaysPropertyWithLinkToCustomer(){
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Property' => array("view_properties"),
                 'Photo' => array('gets')),
@@ -511,6 +531,9 @@ class PropertiesControllerTest extends ControllerTestCase {
 
     public function testManageDisplaysPropertyWith0BedsAsBedsite(){
         $Properties = $this->generate('Properties', array(
+            'components' => array(
+                'Auth'
+            ),
             'models' => array(
                 'Property' => array("view_properties"),
                 'Photo' => array('gets')),
@@ -559,7 +582,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array("setFlash"))));
+                'Session' => array("setFlash"),
+                'Auth')));
 
         $Properties->Property
             ->expects($this->once())
@@ -587,7 +611,8 @@ class PropertiesControllerTest extends ControllerTestCase {
             'models' => array(
                 'Property' => array("save")),
             'components' => array(
-                'Session' => array("setFlash"))));
+                'Session' => array("setFlash"),
+                'Auth')));
 
         $Properties->Property
             ->expects($this->once())

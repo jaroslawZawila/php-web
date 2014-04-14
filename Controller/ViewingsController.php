@@ -15,11 +15,6 @@ class ViewingsController extends AppController {
  */
 	public $components = array('Paginator');
 
-//        public function beforeFilter() {
-//        parent::beforeFilter();
-////            $this->Auth->allow(); // We can remove this line after we're finished
-//        }
-
     public $paginate = array(
         'limit' => 10
     );
@@ -37,20 +32,6 @@ class ViewingsController extends AppController {
         }
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->Viewing->exists($id)) {
-			throw new NotFoundException(__('Invalid viewing'));
-		}
-		$options = array('conditions' => array('Viewing.' . $this->Viewing->primaryKey => $id));
-		$this->set('viewing', $this->Viewing->find('first', $options));
-	}
 
 /**
  * add method

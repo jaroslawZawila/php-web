@@ -195,5 +195,21 @@ CREATE TABLE `viewings` (
   CONSTRAINT `fk_viewings_properties1` FOREIGN KEY (`properties_id`) REFERENCES `properties` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `staffs`;
+CREATE TABLE `staffs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '	',
+  `fname` varchar(45) NOT NULL,
+  `sname` varchar(45) NOT NULL,
+  `address` varchar(250) NOT NULL,
+  `phone` varchar(45) NOT NULL,
+  `compensation` int(11) NOT NULL,
+  `bonus` int(11) NOT NULL,
+  `nin` varchar(10) NOT NULL,
+  `sdate` varchar(45) DEFAULT NULL,
+  `fdate` varchar(45) DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+
 INSERT INTO users VALUES (4,'admin','b682ff05a69e817a747c86fea8626124e6c6277a',4,'2014-03-06 19:29:28','2014-03-06 19:29:28');
 INSERT INTO groups VALUES (5,'admin', null, null);

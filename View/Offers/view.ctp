@@ -29,7 +29,8 @@
                 <table class="table">
                     <tr>
                         <td><b>Customer: </b></td>
-                        <td colspan="3"><?php echo $offer['Customers']['firstname'] . " " . $offer['Customers']['surname']; ?></td>
+                        <td colspan="3"><?php echo $offer['Customers']['firstname'] . " " . $offer['Customers']['surname']
+                         . ", phone: " . $offer['Customers']['phone']; ?></td>
                     </tr>
                     <tr>
                         <td><b>Property:</b></td>

@@ -17,7 +17,7 @@ class RequestsControllerTest extends ControllerTestCase {
 	public $fixtures = array(
 		'app.request',
         'app.requestPlus',
-        'app.requestdetail',
+        'app.requestdetails',
         'app.requestdetailempty'
         );
 
@@ -36,7 +36,7 @@ class RequestsControllerTest extends ControllerTestCase {
  * @return void
  */
 	public function testIndexSortLinksArePresented() {
-        $this->mockAuth($this);
+            $this->mockAuth($this);
         $this->loadFixtures('Request');
 
         $results = $this->testAction('requests/index', array( 'return' => 'view'));
@@ -183,41 +183,47 @@ class RequestsControllerTest extends ControllerTestCase {
         $this->assertPattern('/<span class="next disabled btn btn-default">/', $results);
     }
 
-/**
+    public function testIndexPageDoesNotExsitsRedirectToView() {
+        $this->mockAuth($this);
+        $this->loadFixtures('RequestPlus');
+
+        $this->testAction('requests/index/page:2000', array( 'return' => 'view'));
+
+        $this->assertContains('http://127.0.1.1/admin/request/view', $this->headers['Location']);
+    }
+
+    /**
  * testView method
  *
  * @return void
  */
-	public function testView() {
-        $this->mockAuth($this);
-        $this->loadFixtures('Request', 'Requestdetailempty');
-
-        $results = $this->testAction('requests/view/1', array( 'return' => 'view'));
-        debug($results);
+	public function testViewThrowExceptionIfRequestDoesNotExsit() {
+        $this->expectException('NotFoundException','Request cannot be found.');
+        $this->testAction('/requests/view/1000');
 	}
 
-/**
- * testAdd method
- *
- * @return void
- */
-	public function testAdd() {
-	}
+    public function testViewRetriveRequestAndComments() {
 
-/**
- * testEdit method
- *
- * @return void
- */
-	public function testEdit() {
-	}
+        $Requests = $this->generate('Requests', array(
+            'components' => array(
+                'Auth'
+            ),
+            'models' => array(
+                'Request' => array("find", "exists"),
+                'Requestdetail' => array("all"))));
 
-/**
- * testDelete method
- *
- * @return void
- */
-	public function testDelete() {
-	}
+        $Requests->Request->expects($this->once())
+            ->method('exists')
+            ->will($this->returnValue(true));
+
+        $Requests->Request->expects($this->once())
+            ->method('first');
+
+        $Requests->Requestdetail->expects($this->once())
+            ->method('all');
+
+        $this->testAction('/requests/view/1', array('result'=>'vars'));
+    }
+
 
 }

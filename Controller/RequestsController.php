@@ -52,7 +52,7 @@ class RequestsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Request->exists($id)) {
-			throw new NotFoundException(__('Invalid request'));
+			throw new NotFoundException(__('Request cannot be found.'));
 		}
 		$options = array('conditions' => array('Request.' . $this->Request->primaryKey => $id));
 		$this->set('request', $this->Request->find('first', $options));
@@ -119,24 +119,4 @@ class RequestsController extends AppController {
 			$this->request->data = $this->Request->find('first', $options);
 		}
 	}
-
-/**
- * delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		$this->Request->id = $id;
-		if (!$this->Request->exists()) {
-			throw new NotFoundException(__('Invalid request'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Request->delete()) {
-			$this->Session->setFlash(__('The request has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The request could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}}
+}

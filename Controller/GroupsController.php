@@ -101,27 +101,23 @@ class GroupsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
     public function beforeFilter() {
         parent::beforeFilter();
-   // For CakePHP 2.1 and up
-        $this->Auth->allow();
+        $this->Auth->allow('initDB'); // We can remove this line after we're finished
     }
-
-//    public function beforeFilter() {
-//        parent::beforeFilter();
-//        $this->Auth->allow('initDB'); // We can remove this line after we're finished
-//    }
 
     public function initDB() {
         $group = $this->User->Group;
 
         // Allow admins to everything
-        $group->id = 7;
+        $group->id = 4;
         $this->Acl->allow($group, 'controllers');
 
         // allow managers to posts and widgets
-//        $group->id = 2;
-//        $this->Acl->deny($group, 'controllers');
+        $group->id = 5;
+        $this->Acl->allow($group, 'controllers');
+//        $this->Acl->deny($group, 'controllers/Staffs');
 //        $this->Acl->allow($group, 'controllers/Posts');
 //        $this->Acl->allow($group, 'controllers/Widgets');
 

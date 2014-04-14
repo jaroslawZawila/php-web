@@ -30,4 +30,5 @@
             </table>
             <?php echo $this->element('paging', array('paging'=>$this->request->params['paging']['Offer'])) ?>
         <?php endif; ?>
+            <?php echo $this->Html->link(__('Make Offer'), array('action' => 'add'), array('id'=>'make-offer')); ?>
 </div>

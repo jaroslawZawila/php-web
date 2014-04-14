@@ -13,12 +13,6 @@ class OffersController extends AppController {
  *
  * @var array
  */
-
-        public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow(); // We can remove this line after we're finished
-    }
-
 	public $components = array('Paginator');
     var $uses = array('Offer', 'Property', 'Customer');
 
@@ -57,9 +51,16 @@ class OffersController extends AppController {
             throw new NotFoundException(__('Offer cannot be found.'));
         }
 
-        $this->Offer->read(null, $id);
+        $result = $this->Offer->read(null, $id);
         $this->Offer->set('status', $method);
         if($this->Offer->save()){
+            $this->Property->read(null, $result['Offer']['properties_id']);
+            if($method == "ACCEPTED") {
+                $this->Property->set('status', 'Sold');
+            } else {
+                $this->Property->set('status', 'For sale');
+            };
+            $this->Property->save();
             $this->Session->setFlash(__('The offer has been updated.'));
         }else {
             $this->Session->setFlash(__('There was some problem. Please try again.'));
@@ -95,6 +96,9 @@ class OffersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Offer->create();
 			if ($this->Offer->save($this->request->data)) {
+                $this->Property->read(null, $this->request->data['Offer']['properties_id']);
+                $this->Property->set('status', 'Offer made.');
+                $this->Property->save();
 				$this->Session->setFlash(__('The offer has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {

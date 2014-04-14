@@ -9,9 +9,6 @@ App::uses('AppController', 'Controller');
 class RequestdetailsController extends AppController {
 
 
-    public function beforeFilter() {
-        $this->Auth->allow(); // We can remove this line after we're finished
-    }
 /**
  * Components
  *
@@ -33,7 +30,7 @@ class RequestdetailsController extends AppController {
 				$this->Session->setFlash(__('The requestdetail could not be saved. Please, try again.'));
 			}
 		}
-        return $this->redirect(array('controller'=> 'requests', 'action' => 'view', $this->request->data['Requestdetail']['requests_id']));
+        return $this->redirect(array('controller'=> 'requests', 'action' => 'index'));
 	}
 
 }

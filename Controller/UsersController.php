@@ -15,30 +15,30 @@ class UsersController extends AppController {
  */
 	public $components = array('Paginator');
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
-	}
-
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$this->set('user', $this->User->find('first', $options));
-	}
+///**
+// * index method
+// *
+// * @return void
+// */
+//	public function index() {
+//		$this->User->recursive = 0;
+//		$this->set('users', $this->Paginator->paginate());
+//	}
+//
+///**
+// * view method
+// *
+// * @throws NotFoundException
+// * @param string $id
+// * @return void
+// */
+//	public function view($id = null) {
+//		if (!$this->User->exists($id)) {
+//			throw new NotFoundException(__('Invalid user'));
+//		}
+//		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+//		$this->set('user', $this->User->find('first', $options));
+//	}
 
 /**
  * add method
@@ -70,19 +70,21 @@ class UsersController extends AppController {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Invalid user'));
 		}
+
+        $this->User->read(null,  $id);
 		if ($this->request->is(array('post', 'put'))) {
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-			$this->request->data = $this->User->find('first', $options);
-		}
-		$groups = $this->User->Group->find('list');
-		$this->set(compact('groups'));
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('The user has been saved.'));
+                return $this->redirect(array('controller'=>'staffs','action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+            $this->request->data = $this->User->find('first', $options);
+        }
+        $groups = $this->User->Group->find('list');
+        $this->set(compact('groups'));
 	}
 
 /**
@@ -118,28 +120,5 @@ class UsersController extends AppController {
     public function logout() {
         $this->Session->setFlash('Good-Bye');
         $this->redirect($this->Auth->logout());
-    }
-
-//    public function beforeFilter() {
-//        parent::beforeFilter();
-//
-//        // For CakePHP 2.1 and up
-//        $this->Auth->allow();
-//    }
-
-    public function beforeFilter() {
-        parent::beforeFilter();
-        $this->Auth->allow(); // We can remove this line after we're finished
-    }
-
-    public function initDB() {
-        $group = $this->User->Group;
-        //Allow admins to everything
-        $group->id = 4;
-        $this->Acl->allow($group, 'controllers');
-
-
-        echo "all done";
-        exit;
     }
 }
