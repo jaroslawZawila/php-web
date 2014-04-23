@@ -28,7 +28,7 @@
             <div class="panel-body">
                 <table class="table">
                     <tr>
-                        <td><b>Customer: </b></td>
+                        <td><b>Buyer: </b></td>
                         <td colspan="3"><?php echo $offer['Customers']['firstname'] . " " . $offer['Customers']['surname']
                          . ", phone: " . $offer['Customers']['phone']; ?></td>
                     </tr>
@@ -40,6 +40,12 @@
                                        . $offer['Properties']['postcode']); ?></td>
                     </tr>
                     <tr>
+                        <td><b>Seller</b></td>
+                        <td>
+                            <?php echo h($customer['Customer']['list_properties'])?></td>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><b>Asking price:</b></td>
                         <td><?php echo h($offer['Properties']['price']); ?></td>
                     </tr>
@@ -49,7 +55,7 @@
                     </tr>
                     <tr>
                         <td><b>Status:</b></td>
-                        <td colspan="3"><?php echo h($offer['Offer']['status']); ?></td>
+                        <td colspan="3" id="status"><?php echo h($offer['Offer']['status']); ?></td>
                     </tr>
                     <tr>
                         <td><b>Comment:</b></td>
@@ -57,8 +63,8 @@
                     </tr>
                     <?php if($offer['Offer']['status'] == 'NEW'): ?>
                         <tr>
-                            <td><?php echo $this->Html->link(__('Accept'), array('action' => 'update', 'ACCEPTED', $offer['Offer']['id']), array('class'=>'btn btn-success')); ?>
-                                <?php echo $this->Html->link(__('Reject'), array('action' => 'update', 'REJECTED', $offer['Offer']['id']), array('class'=>'btn btn-danger')); ?></td>
+                            <td><?php echo $this->Html->link(__('Accept'), array('action' => 'update', 'ACCEPTED', $offer['Offer']['id']), array('class'=>'btn btn-success', 'id'=>'accept')); ?>
+                                <?php echo $this->Html->link(__('Reject'), array('action' => 'update', 'REJECTED', $offer['Offer']['id']), array('class'=>'btn btn-danger', 'id'=>'reject')); ?></td>
                             <td><button class="btn btn-info" data-toggle="modal" data-target="#commentModal">
                                                                 Add comment
                                                             </button></td>

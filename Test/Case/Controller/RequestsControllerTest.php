@@ -202,28 +202,4 @@ class RequestsControllerTest extends ControllerTestCase {
         $this->testAction('/requests/view/1000');
 	}
 
-    public function testViewRetriveRequestAndComments() {
-
-        $Requests = $this->generate('Requests', array(
-            'components' => array(
-                'Auth'
-            ),
-            'models' => array(
-                'Request' => array("find", "exists"),
-                'Requestdetail' => array("all"))));
-
-        $Requests->Request->expects($this->once())
-            ->method('exists')
-            ->will($this->returnValue(true));
-
-        $Requests->Request->expects($this->once())
-            ->method('first');
-
-        $Requests->Requestdetail->expects($this->once())
-            ->method('all');
-
-        $this->testAction('/requests/view/1', array('result'=>'vars'));
-    }
-
-
 }

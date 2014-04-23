@@ -1,0 +1,1 @@
+<?php echo $this->Html->image('500.jpg', array('alt' => 'NO IMAGE', 'border' => '0')); ?>

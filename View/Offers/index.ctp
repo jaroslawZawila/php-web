@@ -2,6 +2,7 @@
     <div class="panel panel-heading">
         <h2 class="panel-title">List of offers:</h2>
     </div>
+     <?php echo $this->Html->link(__('Make Offer'), array('action' => 'add'), array('id'=>'make-offer')); ?>
     <?php if(count($offers) == 0): ?>
         <div class="alert alert-warning">There are not any offer in the system.</div>
     <?php endif; ?>
@@ -30,5 +31,4 @@
             </table>
             <?php echo $this->element('paging', array('paging'=>$this->request->params['paging']['Offer'])) ?>
         <?php endif; ?>
-            <?php echo $this->Html->link(__('Make Offer'), array('action' => 'add'), array('id'=>'make-offer')); ?>
 </div>

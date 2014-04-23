@@ -44,6 +44,10 @@ class OffersController extends AppController {
 		$offer =  $this->Offer->find('first', $options);
         $this->set('offer', $offer);
         $this->set('comment', $offer['Offer']['comment']);
+
+        $options2 = array('conditions' => array('Customer.id =' => $offer['Offer']['customers_id']));
+        $customer =  $this->Customer->find('first', $options2);
+        $this->set('customer', $customer);
 	}
 
     public function update($method ,$id = null) {
@@ -54,11 +58,21 @@ class OffersController extends AppController {
         $result = $this->Offer->read(null, $id);
         $this->Offer->set('status', $method);
         if($this->Offer->save()){
-            $this->Property->read(null, $result['Offer']['properties_id']);
+            $ids = $result['Offer']['properties_id'];
+            $this->Property->read(null, $ids);
             if($method == "ACCEPTED") {
                 $this->Property->set('status', 'Sold');
+                $this->Offer->updateAll(
+                    array('Offer.status' => "'REJECTED'"),
+                    array('AND' => array( array('Offer.properties_id =' => $ids),
+                                          array('Offer.status =' => "NEW")))
+                );
+
             } else {
-                $this->Property->set('status', 'For sale');
+                $n = $this->Offer->find('count', array('conditions' => array('AND' => array( array('Offer.properties_id =' => $ids),
+                                                                                             array('Offer.status =' => "NEW")))));
+                if($n == 0) {
+                    $this->Property->set('status', 'For sale');}
             };
             $this->Property->save();
             $this->Session->setFlash(__('The offer has been updated.'));
@@ -97,10 +111,12 @@ class OffersController extends AppController {
 			$this->Offer->create();
 			if ($this->Offer->save($this->request->data)) {
                 $this->Property->read(null, $this->request->data['Offer']['properties_id']);
-                $this->Property->set('status', 'Offer made.');
-                $this->Property->save();
-				$this->Session->setFlash(__('The offer has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+                $this->Property->set('status', "Offer made");
+                if($this->Property->save()){
+				    $this->Session->setFlash(__('The offer has been saved.'));
+				    return $this->redirect(array('action' => 'index'));
+                };
+                $this->set('x', $this->Property->invalidFields());
 			} else {
 				$this->Session->setFlash(__('There was some problem. Please try again.'));
 			}

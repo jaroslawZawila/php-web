@@ -10,8 +10,8 @@
         </ul>
     </li>
     <li class="divider-vertical"><a href="/admin/viewings/view" id="menu-viewings">Viewings</a></li>
-    <li class="divider-vertical"><a href="/offers">Offers</a></li>
-    <?php if($this->Session->read('Auth.User')['Group']['id'] == 4): ?>
-        <li class="divider-vertical"><a href="/staffs">Staff</a></li>
+    <li class="divider-vertical"><a href="/offers" id="offers">Offers</a></li>
+    <?php if($this->Session->read('Auth.User')['Group']['id'] == 1): ?>
+        <li class="divider-vertical"><a href="/staffs" id="staffs">Staff</a></li>
     <?php endif ?>
 </ul>

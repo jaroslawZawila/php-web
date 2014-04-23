@@ -105,20 +105,19 @@ CREATE TABLE `properties` (
   CONSTRAINT `fk_properties_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `offers`;
 CREATE TABLE `offers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `properties_id` int(11) NOT NULL,
   `customers_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `status` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL DEFAULT 'NEW',
   `comment` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`,`properties_id`,`customers_id`),
   KEY `fk_offers_properties1` (`properties_id`),
   KEY `fk_offers_customers1` (`customers_id`),
   CONSTRAINT `fk_offers_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_offers_properties1` FOREIGN KEY (`properties_id`) REFERENCES `properties` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `documents`;
 CREATE TABLE `documents` (
@@ -209,7 +208,11 @@ CREATE TABLE `staffs` (
   `fdate` varchar(45) DEFAULT NULL,
   `users_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO users VALUES (4,'admin','b682ff05a69e817a747c86fea8626124e6c6277a',4,'2014-03-06 19:29:28','2014-03-06 19:29:28');
-INSERT INTO groups VALUES (5,'admin', null, null);
+
+INSERT INTO acos VALUES (1,NULL,NULL,NULL,'controllers',1,154),(2,1,NULL,NULL,'Customers',2,9),(3,2,NULL,NULL,'index',3,4),(4,2,NULL,NULL,'view',5,6),(5,2,NULL,NULL,'add',7,8),(6,1,NULL,NULL,'Docs',10,21),(7,6,NULL,NULL,'index',11,12),(8,6,NULL,NULL,'view',13,14),(9,6,NULL,NULL,'add',15,16),(10,6,NULL,NULL,'edit',17,18),(11,6,NULL,NULL,'delete',19,20),(12,1,NULL,NULL,'Documents',22,33),(13,12,NULL,NULL,'index',23,24),(14,12,NULL,NULL,'view',25,26),(15,12,NULL,NULL,'add',27,28),(16,12,NULL,NULL,'edit',29,30),(17,12,NULL,NULL,'delete',31,32),(18,1,NULL,NULL,'Groups',34,47),(19,18,NULL,NULL,'index',35,36),(20,18,NULL,NULL,'view',37,38),(21,18,NULL,NULL,'add',39,40),(22,18,NULL,NULL,'edit',41,42),(23,18,NULL,NULL,'delete',43,44),(24,18,NULL,NULL,'initDB',45,46),(25,1,NULL,NULL,'Home',48,53),(26,25,NULL,NULL,'index',49,50),(27,25,NULL,NULL,'adminhome',51,52),(28,1,NULL,NULL,'Offers',54,65),(29,28,NULL,NULL,'index',55,56),(30,28,NULL,NULL,'view',57,58),(31,28,NULL,NULL,'update',59,60),(32,28,NULL,NULL,'editComment',61,62),(33,28,NULL,NULL,'add',63,64),(34,1,NULL,NULL,'Pages',66,69),(35,34,NULL,NULL,'display',67,68),(36,1,NULL,NULL,'Photos',70,75),(37,36,NULL,NULL,'create',71,72),(38,36,NULL,NULL,'delete',73,74),(39,1,NULL,NULL,'Properties',76,103),(40,39,NULL,NULL,'saleprices',77,78),(41,39,NULL,NULL,'letprices',79,80),(42,39,NULL,NULL,'buildquery',81,82),(43,39,NULL,NULL,'featureds',83,84),(44,39,NULL,NULL,'tolet',85,86),(45,39,NULL,NULL,'forsell',87,88),(46,39,NULL,NULL,'index',89,90),(47,39,NULL,NULL,'lists',91,92),(48,39,NULL,NULL,'view',93,94),(49,39,NULL,NULL,'add',95,96),(50,39,NULL,NULL,'edit',97,98),(51,39,NULL,NULL,'manage',99,100),(52,39,NULL,NULL,'update_description',101,102),(53,1,NULL,NULL,'Requestdetails',104,107),(54,53,NULL,NULL,'add',105,106),(55,1,NULL,NULL,'Requests',108,119),(56,55,NULL,NULL,'index',109,110),(57,55,NULL,NULL,'view',111,112),(58,55,NULL,NULL,'applyStatus',113,114),(59,55,NULL,NULL,'add',115,116),(60,55,NULL,NULL,'edit',117,118),(61,1,NULL,NULL,'Staffs',120,131),(62,61,NULL,NULL,'index',121,122),(63,61,NULL,NULL,'view',123,124),(64,61,NULL,NULL,'add',125,126),(65,61,NULL,NULL,'edit',127,128),(66,61,NULL,NULL,'terminate',129,130),(67,1,NULL,NULL,'Users',132,143),(68,67,NULL,NULL,'add',133,134),(69,67,NULL,NULL,'edit',135,136),(70,67,NULL,NULL,'delete',137,138),(71,67,NULL,NULL,'login',139,140),(72,67,NULL,NULL,'logout',141,142),(73,1,NULL,NULL,'Viewings',144,151),(74,73,NULL,NULL,'index',145,146),(75,73,NULL,NULL,'add',147,148),(76,73,NULL,NULL,'edit',149,150),(77,1,NULL,NULL,'AclExtras',152,153);
+INSERT INTO aros VALUES (1,NULL,'Group',1,NULL,1,4),(2,NULL,'Group',2,NULL,5,6),(3,1,'User',1,NULL,2,3);
+INSERT INTO aros_acos VALUES (1,1,1,'1','1','1','1'),(2,2,1,'1','1','1','0'),(3,3,1,'1','1','1','1');
+INSERT INTO groups VALUES (1,'admin','2014-04-22 11:38:43','2014-04-22 11:38:43'),(2,'staff','2014-04-22 11:38:48','2014-04-22 11:38:48');
+INSERT INTO users VALUES (1,'admin','b682ff05a69e817a747c86fea8626124e6c6277a',1,'2014-04-22 11:39:01','2014-04-22 11:39:01');

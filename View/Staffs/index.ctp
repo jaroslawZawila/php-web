@@ -3,6 +3,8 @@
         <h2 class="panel-title">Members of staff:</h2>
     </div>
     <?php if(count($staffs) == 0): ?>
+        <?php echo $this->Html->link(__('Add new user'), array('action' => 'add'), array('id'=>'add-button')); ?>
+        <br/>
         <div class="alert alert-warning">There are not any offer in the system.</div>
     <?php endif; ?>
     <?php if(count($staffs) > 0): ?>

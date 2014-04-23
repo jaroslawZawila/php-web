@@ -22,7 +22,7 @@ class CustomerSuite extends PHPUnit_Framework_TestSuite
 
         $this->conn->init();
 
-        $this->conn->initData("init-log.sql");
+//        $this->conn->initData("init-log.sql");
     }
 
     protected function tearDown()

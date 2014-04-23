@@ -8,11 +8,13 @@
 
 App::uses('TestHelper', 'Test');
 
-class RequestFormSuite extends PHPUnit_Framework_TestSuite
+class RunSuite extends PHPUnit_Framework_TestSuite
 {
+    private $conn;
+
     public static function suite()
     {
-        return new RequestFormSuite('RequestFormTest');
+        return new RunSuite('RequestFormTest');
     }
 
     protected function setUp()
@@ -20,8 +22,6 @@ class RequestFormSuite extends PHPUnit_Framework_TestSuite
         $this->conn = new TestHelper();
 
         $this->conn->init();
-
-        $this->conn->initData("init-log.sql");
     }
 
     protected function tearDown()

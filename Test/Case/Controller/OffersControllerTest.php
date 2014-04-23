@@ -363,7 +363,7 @@ class OffersControllerTest extends ControllerTestCase {
 
     }
 
-    public function testAddPostRequestSaveMessageAndRedirectToindex() {
+    public function testAddPostRequestSaveMessageAndRedirectToIndex() {
         $Offers = $this->generate('Offers', array(
             'components' => array(
                 'Session' => array('setFlash'),
@@ -386,6 +386,11 @@ class OffersControllerTest extends ControllerTestCase {
 
         $data = array(
             'Viewing' => array(
+                'customers_id' => 1,
+                'comment' => 'comment',
+                'properties_id' => 1
+            ),
+            'Offer' => array(
                 'customers_id' => 1,
                 'comment' => 'comment',
                 'properties_id' => 1

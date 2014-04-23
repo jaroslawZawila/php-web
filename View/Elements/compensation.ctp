@@ -22,7 +22,7 @@
                 </fieldset>
             </div>
             <div class="modal-footer">
-                <?php echo $this->Form->submit('Upadate', array('class'=>'btn btn-primary', 'id'=>'epu'))?>
+                <?php echo $this->Form->submit('Upadate', array('class'=>'btn btn-primary', 'id'=>'epuc'))?>
                 <?php echo $this->Form->end(); ?>
             </div>
         </div>

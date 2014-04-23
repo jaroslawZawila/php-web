@@ -12,7 +12,7 @@ class PropertiesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index'); // We can remove this line after we're finished
+        $this->Auth->allow('index', 'view'); // We can remove this line after we're finished
     }
 
 /**

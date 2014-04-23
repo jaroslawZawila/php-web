@@ -39,3 +39,5 @@
             </div>
         </div>
 </div>
+<?php echo print_r($x) ?>
+<?php echo $x ?>

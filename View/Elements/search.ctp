@@ -36,6 +36,6 @@
         </div>
     </fieldset>
     <?php
-            echo $this->Form->submit('Search', array('class'=>'btn btn-primary'));
+            echo $this->Form->submit('Search', array('class'=>'btn btn-primary', 'id'=>'search-button'));
             echo $this->Form->end(); ?>
 </div>

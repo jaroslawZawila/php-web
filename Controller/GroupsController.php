@@ -107,15 +107,20 @@ class GroupsController extends AppController {
         $this->Auth->allow('initDB'); // We can remove this line after we're finished
     }
 
+
+
     public function initDB() {
         $group = $this->User->Group;
 
         // Allow admins to everything
-        $group->id = 4;
+        $group->id = 1;
         $this->Acl->allow($group, 'controllers');
 
         // allow managers to posts and widgets
-        $group->id = 5;
+        $group->id = 2;
+        $this->Acl->allow($group, 'controllers');
+
+        $group->id = 3;
         $this->Acl->allow($group, 'controllers');
 //        $this->Acl->deny($group, 'controllers/Staffs');
 //        $this->Acl->allow($group, 'controllers/Posts');
